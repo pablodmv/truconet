@@ -5,7 +5,7 @@ using System.Text;
 
 namespace truconet
 {
-    class Carta
+    public class Carta
     {
         private int cod;
         public enum palo {Oro, Copa, Basto, Espada};

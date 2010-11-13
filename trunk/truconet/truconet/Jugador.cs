@@ -5,7 +5,7 @@ using System.Text;
 
 namespace truconet
 {
-    class Jugador
+    public class Jugador
     {
     }
 }

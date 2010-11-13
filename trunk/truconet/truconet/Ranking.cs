@@ -5,7 +5,7 @@ using System.Text;
 
 namespace truconet
 {
-    class Ranking
+    public class Ranking
     {
 
         private int posicion;
