@@ -48,6 +48,7 @@
     <Compile Include="Carta.cs" />
     <Compile Include="Controlador.cs" />
     <Compile Include="Credencial.cs" />
+    <Compile Include="Denuncia.cs" />
     <Compile Include="IReglas.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="Jugador.cs" />

@@ -5,13 +5,13 @@ using System.Text;
 
 namespace truconet
 {
-    class Credencial
+    public class Credencial
     {
 
         private String login;
         private String pass;
         private String nick;
-
+        private Boolean admin;
 
         //Constructores
         public Credencial()
@@ -20,6 +20,12 @@ namespace truconet
 
 
         //Getters y Setters
+
+        public Boolean Admin
+        {
+            get { return admin; }
+            set { admin = value; }
+        }
 
         public String Login
         {

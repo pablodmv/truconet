@@ -8,6 +8,7 @@ namespace truconet
     public class Usuario
     {
 
+        private int id;
         private Credencial credencial;
         private String nombre;
         private String apellido;
@@ -21,6 +22,12 @@ namespace truconet
         }
 
         //Getters y Setters
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public String EMail
         {

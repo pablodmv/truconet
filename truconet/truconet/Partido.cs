@@ -5,14 +5,38 @@ using System.Text;
 
 namespace truconet
 {
-    class Partido
+    public class Partido
     {
+        private int id;
         private int identificador;
         private List<Jugador> participantes = new List<Jugador>();
         private DateTime fechaInicio;
         private DateTime fechaFin;
         private List<Jugador> ganadores = new List<Jugador>();
         private int[,] puntajeFinal = new int[2, 3];
+        private int numParticipantes;
+
+        //Constructor
+
+        public Partido()
+        {
+        }
+
+
+        //Getters y Setters
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+
+        public int NumParticipantes
+        {
+            get { return numParticipantes; }
+            set { numParticipantes = value; }
+        }
 
         public int[,] PuntajeFinal
         {
