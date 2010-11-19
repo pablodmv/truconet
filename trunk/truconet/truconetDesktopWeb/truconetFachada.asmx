@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="truconetFachada.asmx.cs" Class="truconetDesktopWeb.truconetFachada" %>

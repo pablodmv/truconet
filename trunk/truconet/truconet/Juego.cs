@@ -5,7 +5,12 @@ using System.Text;
 
 namespace truconet
 {
+    
     class Juego
-    {
+    { 
+    
+    
     }
+
+       
 }
