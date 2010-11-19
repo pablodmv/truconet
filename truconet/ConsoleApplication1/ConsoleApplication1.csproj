@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{80DD7855-32A1-4F85-9B38-82A3E0255AA9}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F5C32029-9C65-4D6D-AAEB-272D89975E01}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>truconet</RootNamespace>
-    <AssemblyName>truconet</AssemblyName>
+    <RootNamespace>ConsoleApplication1</RootNamespace>
+    <AssemblyName>ConsoleApplication1</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,25 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Carta.cs" />
-    <Compile Include="cartasMano.cs" />
-    <Compile Include="Controlador.cs" />
-    <Compile Include="Credencial.cs" />
-    <Compile Include="Denuncia.cs" />
-    <Compile Include="Envido.cs" />
-    <Compile Include="Flor.cs" />
-    <Compile Include="IJugada.cs" />
-    <Compile Include="IReglas.cs" />
-    <Compile Include="Juego.cs" />
-    <Compile Include="Jugador.cs" />
-    <Compile Include="Partido.cs" />
-    <Compile Include="Ranking.cs" />
-    <Compile Include="Truco.cs" />
-    <Compile Include="Usuario.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

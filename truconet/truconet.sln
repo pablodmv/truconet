@@ -3,6 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconet", "truconet\truconet.csproj", "{80DD7855-32A1-4F85-9B38-82A3E0255AA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrucoNetBackend", "TrucoNetBackend\TrucoNetBackend.csproj", "{72DD1A28-295D-40B8-8EDB-4785F8E58B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDomainWs", "truconetDomainWs\truconetDomainWs.csproj", "{F69A72AE-A93A-488F-92A0-08C9532D00F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDesktop", "truconetDesktop\truconetDesktop.csproj", "{4E53DF16-0C4D-46D2-B626-A888B2A2D272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetWeb", "truconetWeb\truconetWeb.csproj", "{45F71516-79D5-415F-9275-1C29AB8D382F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDesktopWeb", "truconetDesktopWeb\truconetDesktopWeb.csproj", "{8851E235-F9BE-499A-9BCA-ED3A645E1457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +23,26 @@ Global
 		{80DD7855-32A1-4F85-9B38-82A3E0255AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80DD7855-32A1-4F85-9B38-82A3E0255AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80DD7855-32A1-4F85-9B38-82A3E0255AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72DD1A28-295D-40B8-8EDB-4785F8E58B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72DD1A28-295D-40B8-8EDB-4785F8E58B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72DD1A28-295D-40B8-8EDB-4785F8E58B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72DD1A28-295D-40B8-8EDB-4785F8E58B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69A72AE-A93A-488F-92A0-08C9532D00F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69A72AE-A93A-488F-92A0-08C9532D00F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69A72AE-A93A-488F-92A0-08C9532D00F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69A72AE-A93A-488F-92A0-08C9532D00F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E53DF16-0C4D-46D2-B626-A888B2A2D272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E53DF16-0C4D-46D2-B626-A888B2A2D272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E53DF16-0C4D-46D2-B626-A888B2A2D272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E53DF16-0C4D-46D2-B626-A888B2A2D272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F71516-79D5-415F-9275-1C29AB8D382F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F71516-79D5-415F-9275-1C29AB8D382F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F71516-79D5-415F-9275-1C29AB8D382F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F71516-79D5-415F-9275-1C29AB8D382F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

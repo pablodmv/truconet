@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace truconet
+namespace ConsoleApplication1
 {
-    public interface IReglas
+    class Program
     {
-    
-
+        static void Main(string[] args)
+        {
+        }
     }
 }
