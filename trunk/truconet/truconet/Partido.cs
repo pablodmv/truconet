@@ -12,28 +12,29 @@ namespace truconet
         private string descripcion;
         private Carta muestra;
         private int identificador;
-        private List<Jugador> participantes= new List<Jugador>();
+        private List<Jugador> participantes;
         private DateTime fechaInicio;
         private DateTime fechaFin;
         private List<Jugador> ganadores = new List<Jugador>();
        // private int[,] puntajeFinal = new int[2, 3]; DA UN ERROR. NO SE ADMITEN MATRICES MULTIDIMENSIONALES
         Random rnd = new Random();
-        private List<Carta> masoJuego;
+        //private List<Carta> masoJuego;
         private List<Carta> maso;
 
       
 
         //Constructor
 
-        public Partido(string desc, List<Jugador> pParticipantes, List<Carta> maso)
+        public Partido(string desc, List<Jugador> pParticipantes)//, List<Carta> maso)
         {
             this.id = num;
             num = num + 1;
             this.participantes = pParticipantes;
             this.fechaInicio = new DateTime();
             this.descripcion = desc;
-            this.maso = new List<Carta>(maso);
-            this.masoJuego = new List<Carta>(maso);
+          //  this.maso = new List<Carta>(maso);
+            //((this.masoJuego = new List<Carta>(maso);
+            repartirCartas();
 
         }
         public Partido()
@@ -107,24 +108,43 @@ namespace truconet
 
         }
 
-        public List<Carta> MasoJuego
-        {
-            get { return masoJuego; }
-            set { masoJuego = value; }
-        }
+        //public List<Carta> MasoJuego
+        //{
+        //    get { return masoJuego; }
+        //    set { masoJuego = value; }
+        //}
 
      
         #endregion
 
 
+        public void crearMaso()
+        {
+            maso = new List<Carta>();
+
+            int[] num = { 1, 2, 3, 4, 5, 6, 7, 10, 11, 12 };
+
+            // {Oro=1, Copa=2, Basto=3, Espada=4}
+            // recorro por palo y luego por numero de carta
+            for (int i = 1; i <= 4; i++)
+            {
+                //Recorro por numero de carta, creando las cartas y agregandolas al maso
+                for (int j = 0; j < num.Length; j++)
+                {
+                    Carta carta = new Carta(num[j], i);
+                    maso.Add(carta);
+                }
+            }
+
+        }
 
         public void barajar()
         {
             //copio el maso al juego
-            this.MasoJuego = new List<Carta>(this.maso);
+            List<Carta> MasoJuego = maso;// new List<Carta>(this.maso);
             foreach (Carta tmpCarta in MasoJuego)
             {
-                int tmpRnd = (int)rnd.NextDouble() * MasoJuego.Count();
+                int tmpRnd = (int)rnd.Next() * MasoJuego.Count();
                 tmpCarta.Cod = tmpRnd;
             }
             MasoJuego.Sort(ordenarMaso);
@@ -138,21 +158,41 @@ namespace truconet
 
         public void repartirCartas()
         {
+            this.crearMaso();
+            generoManoJugador();
             barajar();
             //Reparto 3 cartas a cada jugador.
             for (int i = 0; i < 3; i++)
             {
                 foreach (Jugador jug in participantes)
                 {
-                    masoJuego[0].Jugador = jug;
-                    jug.agregarCarta(MasoJuego[0]);
-                    MasoJuego.RemoveAt(0);
+                   
+                    //masoJuego[0].Jugador = jug;
+                    jug.agregarCarta(maso[0]);
+                    maso.RemoveAt(0);
                 }
             }
             //Entrego la muestra
-            muestra = masoJuego[0];
-            MasoJuego.RemoveAt(0);
+            muestra = maso[0];
+            maso.RemoveAt(0);
             this.setTipoCarta(); //Reviso los tipos de carta asignados
+        }
+
+        private void generoManoJugador()
+        {
+            foreach (Jugador jug in participantes)
+            {
+                 //Verifico que el jugador tenga creado la mano para el partido. Si existe, borro y reparto, sino, la creo
+                    if (jug.Mano==null)
+                    {
+                       
+                        jug.Mano = new cartasMano(this.Id);
+                    }
+                    else
+                    {
+                        jug.Mano.BorroCartas();
+                    }
+            }
         }
 
         public void setTipoCarta()
@@ -162,10 +202,10 @@ namespace truconet
             {
                 foreach (Carta card in jug.getCartas())
                 {
-                    if (card.Palo == muestra.Palo) //si son del mismo palo me fijo el numero
+                    if (card.Palo == muestra.Palo && pieza.Contains(card.Numero)) //si son del mismo palo me fijo el numero
                     {
-                        if (pieza.Contains(card.Numero))
-                        {
+                        //if (pieza.Contains(card.Numero))
+                        //{
                             card.Categoria = 1; //Es pieza
                             //Seteo Puntaje
                             switch (card.Numero)
@@ -210,7 +250,7 @@ namespace truconet
                                     break;
 
                             }
-                        }
+                            
                     }
                     else //Si no son del mismo palo evaluo si es mata, fio o comun
                     {
@@ -226,6 +266,11 @@ namespace truconet
                         {
                             card.Categoria = 4; //Es comun
                         }
+                       
+                    }
+                    if (card.Categoria == 0)
+                    {
+                        card.Categoria = 99; //Error. Debe salir con alguna categoria !=0
                     }
                 }
             }

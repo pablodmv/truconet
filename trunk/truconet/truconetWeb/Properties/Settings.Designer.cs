@@ -27,9 +27,9 @@ namespace truconetWeb.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51052/truconetFachada.asmx")]
-        public string truconetWeb_truconetFachada_truconetFachada {
+        public string truconetWeb_truconetFachadaProxy_truconetFachada {
             get {
-                return ((string)(this["truconetWeb_truconetFachada_truconetFachada"]));
+                return ((string)(this["truconetWeb_truconetFachadaProxy_truconetFachada"]));
             }
         }
     }

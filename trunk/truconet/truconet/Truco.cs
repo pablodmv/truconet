@@ -12,8 +12,9 @@ namespace truconet
          //public static int cantJugadores = 0;
         List<Partido> colPartido;
         List<Jugador> colJugadores;
-        private List<Carta> maso = new List<Carta>();
 
+        private List<Carta> maso = new List<Carta>();
+        Random rnd = new Random();
        
 
         
@@ -32,8 +33,17 @@ namespace truconet
         {
             this.colPartido = new List<Partido>();
             this.colJugadores = new List<Jugador>();
-            crearMaso();
+            //crearMaso();
+            
         }
+
+
+
+
+
+
+
+
 
 
         public static Truco getInstance()
@@ -42,6 +52,7 @@ namespace truconet
             if (instancia==null)
             {
                 instancia = new Truco();
+                instancia.datosPrueba(); //Carga datos de prueba
             }
 
                 return instancia;
@@ -49,13 +60,74 @@ namespace truconet
         }
 
 
-        public void iniciarPartido(List<Jugador> pParticipantes, string desc)
+        public List<Jugador> obtenerJugadores(int[] id)
         {
-            if ((pParticipantes.Count()%2) == 0)
+            List<Jugador> retorno = new List<Jugador>();
+            foreach (Jugador jug in this.ColJugadores)
             {
-                Partido partido = new Partido(desc, pParticipantes,maso);
-                this.colPartido.Add(partido);  
+                if (id.Contains(jug.Id))
+                {
+                    retorno.Add(jug);
+                    
+                }
+                
             }
+            return retorno;
+        
+        }
+
+        private void datosPrueba()
+        {
+            //Jugador pepe = new Jugador();
+            //Jugador pepe2 = new Jugador();
+            //pepe.Nombre = "Pablo";
+            //pepe.Apellido = "Martinez";
+            //pepe2.Nombre = "Gustavo";
+            //pepe2.Apellido = "Leites";
+            string nombre = "Pablo ";
+            string apellido = "Martinez";
+            string nombre1 = "Gustavo ";
+            string apellido1 = "Leites";
+            string nombre2 = "Jorge ";
+            string apellido2 = "Lopez";
+            string nombre3 = "Andres ";
+            string apellido3 = "Perez";
+            this.ColJugadores.Add(new Jugador(nombre, apellido));
+            this.ColJugadores.Add(new Jugador(nombre1, apellido1));
+            this.ColJugadores.Add(new Jugador(nombre2, apellido2));
+            this.ColJugadores.Add(new Jugador(nombre3, apellido3));
+        }
+
+
+
+
+        public int iniciarPartido(int[] pParticipantes, string desc)
+        {
+
+            if ((pParticipantes.Length %2) == 0)
+            {
+                List<Jugador> pParticipantesObj = new List<Jugador>();
+                pParticipantesObj = this.obtenerJugadores(pParticipantes);
+
+                Partido partido = new Partido(desc, pParticipantesObj);
+                this.colPartido.Add(partido);
+                return partido.Id;
+            }
+            return 0;
+        }
+
+
+        public List<Jugador> participantesPartido(int idPartido)
+        {
+            foreach (Partido part in this.colPartido)
+            {
+                if (part.Id==idPartido)
+                {
+                    return part.Participantes;
+                }
+            }
+            return null;
+        
         
         }
 
@@ -66,30 +138,66 @@ namespace truconet
             set { colPartido = value; }
         }
 
+
+        public List<Jugador> ColJugadores
+        {
+            get { return colJugadores; }
+            set { colJugadores = value; }
+        }
+
         public List<Carta> Maso
         {
             get { return maso; }
             set { maso = value; }
         }
 
-        public void crearMaso()
+      
+        public Partido getPartido(int idPartido)
         {
-            maso = new List<Carta>();
-
-            int[] num = { 1, 2, 3, 4, 5, 6, 7, 10, 11, 12 };
-
-            // {Oro=1, Copa=2, Basto=3, Espada=4}
-            // recorro por palo y luego por numero de carta
-            for (int i = 1; i <= 4; i++)
+            foreach (Partido part in this.ColPartido)
             {
-                //Recorro por numero de carta, creando las cartas y agregandolas al maso
-                for (int j = 0; j < num.Length; j++)
+                if (part.Id==idPartido)
                 {
-                    Carta carta = new Carta(num[j], i);
-                    maso.Add(carta);
+                    return part;
+                }
+                
+            }
+            return null;
+        }
+
+        public bool borrarParticipante(int idJugador, int idPartido)
+        {
+            Partido tmpPart = this.getPartido(idPartido);
+
+            foreach (Jugador jug in tmpPart.Participantes)
+            {
+                if (jug.Id==idJugador)
+                {
+                    tmpPart.Participantes.Remove(jug);
+                    return true;
+                }
+                
+            }
+            return false;
+        
+        
+        
+        }
+
+        public List<Partido> getPartidosPendientes()
+        {
+            List<Partido> retorno = new List<Partido>();
+            foreach (Partido game in this.colPartido)
+            {
+                if (game.FechaFin!=null)
+                {
+                    retorno.Add(game);
                 }
             }
-
+            return retorno;
+                
+        
+        
         }
 
     }

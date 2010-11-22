@@ -2,23 +2,13 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://truconet/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://truconet/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://truconet/">
-      <s:element name="crearPartido">
+      <s:element name="obtenerJugadores">
         <s:complexType />
       </s:element>
-      <s:element name="crearPartidoResponse">
+      <s:element name="obtenerJugadoresResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="crearPartidoResult" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getJugadores">
-        <s:complexType />
-      </s:element>
-      <s:element name="getJugadoresResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getJugadoresResult" type="tns:ArrayOfJugador" />
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerJugadoresResult" type="tns:ArrayOfJugador" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -69,17 +59,27 @@
           <s:element minOccurs="0" maxOccurs="1" name="Jugador" type="tns:Jugador" />
         </s:sequence>
       </s:complexType>
-      <s:element name="getJugadorPartido">
+      <s:element name="crearPartido">
+        <s:complexType />
+      </s:element>
+      <s:element name="crearPartidoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="crearPartidoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getjugadorPartido">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="idPartido" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="getJugadorPartidoResponse">
+      <s:element name="getjugadorPartidoResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getJugadorPartidoResult" type="tns:ArrayOfJugador" />
+            <s:element minOccurs="0" maxOccurs="1" name="getjugadorPartidoResult" type="tns:ArrayOfJugador" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -141,23 +141,23 @@
       </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="obtenerJugadoresSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerJugadores" />
+  </wsdl:message>
+  <wsdl:message name="obtenerJugadoresSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerJugadoresResponse" />
+  </wsdl:message>
   <wsdl:message name="crearPartidoSoapIn">
     <wsdl:part name="parameters" element="tns:crearPartido" />
   </wsdl:message>
   <wsdl:message name="crearPartidoSoapOut">
     <wsdl:part name="parameters" element="tns:crearPartidoResponse" />
   </wsdl:message>
-  <wsdl:message name="getJugadoresSoapIn">
-    <wsdl:part name="parameters" element="tns:getJugadores" />
+  <wsdl:message name="getjugadorPartidoSoapIn">
+    <wsdl:part name="parameters" element="tns:getjugadorPartido" />
   </wsdl:message>
-  <wsdl:message name="getJugadoresSoapOut">
-    <wsdl:part name="parameters" element="tns:getJugadoresResponse" />
-  </wsdl:message>
-  <wsdl:message name="getJugadorPartidoSoapIn">
-    <wsdl:part name="parameters" element="tns:getJugadorPartido" />
-  </wsdl:message>
-  <wsdl:message name="getJugadorPartidoSoapOut">
-    <wsdl:part name="parameters" element="tns:getJugadorPartidoResponse" />
+  <wsdl:message name="getjugadorPartidoSoapOut">
+    <wsdl:part name="parameters" element="tns:getjugadorPartidoResponse" />
   </wsdl:message>
   <wsdl:message name="getPartidoSoapIn">
     <wsdl:part name="parameters" element="tns:getPartido" />
@@ -177,18 +177,18 @@
   <wsdl:message name="borrarParticipanteSoapOut">
     <wsdl:part name="parameters" element="tns:borrarParticipanteResponse" />
   </wsdl:message>
-  <wsdl:portType name="truconetDomainSoap">
+  <wsdl:portType name="truconetFachadaSoap">
+    <wsdl:operation name="obtenerJugadores">
+      <wsdl:input message="tns:obtenerJugadoresSoapIn" />
+      <wsdl:output message="tns:obtenerJugadoresSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="crearPartido">
       <wsdl:input message="tns:crearPartidoSoapIn" />
       <wsdl:output message="tns:crearPartidoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="getJugadores">
-      <wsdl:input message="tns:getJugadoresSoapIn" />
-      <wsdl:output message="tns:getJugadoresSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getJugadorPartido">
-      <wsdl:input message="tns:getJugadorPartidoSoapIn" />
-      <wsdl:output message="tns:getJugadorPartidoSoapOut" />
+    <wsdl:operation name="getjugadorPartido">
+      <wsdl:input message="tns:getjugadorPartidoSoapIn" />
+      <wsdl:output message="tns:getjugadorPartidoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="getPartido">
       <wsdl:input message="tns:getPartidoSoapIn" />
@@ -203,8 +203,17 @@
       <wsdl:output message="tns:borrarParticipanteSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="truconetDomainSoap" type="tns:truconetDomainSoap">
+  <wsdl:binding name="truconetFachadaSoap" type="tns:truconetFachadaSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="obtenerJugadores">
+      <soap:operation soapAction="http://truconet/obtenerJugadores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="crearPartido">
       <soap:operation soapAction="http://truconet/crearPartido" style="document" />
       <wsdl:input>
@@ -214,17 +223,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getJugadores">
-      <soap:operation soapAction="http://truconet/getJugadores" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getJugadorPartido">
-      <soap:operation soapAction="http://truconet/getJugadorPartido" style="document" />
+    <wsdl:operation name="getjugadorPartido">
+      <soap:operation soapAction="http://truconet/getjugadorPartido" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -260,8 +260,17 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="truconetDomainSoap12" type="tns:truconetDomainSoap">
+  <wsdl:binding name="truconetFachadaSoap12" type="tns:truconetFachadaSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="obtenerJugadores">
+      <soap12:operation soapAction="http://truconet/obtenerJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="crearPartido">
       <soap12:operation soapAction="http://truconet/crearPartido" style="document" />
       <wsdl:input>
@@ -271,17 +280,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getJugadores">
-      <soap12:operation soapAction="http://truconet/getJugadores" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getJugadorPartido">
-      <soap12:operation soapAction="http://truconet/getJugadorPartido" style="document" />
+    <wsdl:operation name="getjugadorPartido">
+      <soap12:operation soapAction="http://truconet/getjugadorPartido" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -317,12 +317,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="truconetDomain">
-    <wsdl:port name="truconetDomainSoap" binding="tns:truconetDomainSoap">
-      <soap:address location="http://localhost:50435/truconetDomain.asmx" />
+  <wsdl:service name="truconetFachada">
+    <wsdl:port name="truconetFachadaSoap" binding="tns:truconetFachadaSoap">
+      <soap:address location="http://localhost:51052/truconetFachada.asmx" />
     </wsdl:port>
-    <wsdl:port name="truconetDomainSoap12" binding="tns:truconetDomainSoap12">
-      <soap12:address location="http://localhost:50435/truconetDomain.asmx" />
+    <wsdl:port name="truconetFachadaSoap12" binding="tns:truconetFachadaSoap12">
+      <soap12:address location="http://localhost:51052/truconetFachada.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

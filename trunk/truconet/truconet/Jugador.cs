@@ -5,8 +5,9 @@ using System.Text;
 
 namespace truconet
 {
-    public class Jugador
+    public class Jugador : Usuario
     {
+        public static int num = 0;
 
         bool esMano=false;
         cartasMano mano = new cartasMano();
@@ -14,12 +15,20 @@ namespace truconet
        
 
 
-        public Jugador()
+        public Jugador(string nombre, string apellido)
         {
+            this.Nombre = nombre;
+            this.Apellido = apellido;
+            this.Id = num;
+            num += 1;
+
             
         }
 
+        private Jugador()
+        {
 
+        }
 
         public void agregarCarta(Carta card)
         {

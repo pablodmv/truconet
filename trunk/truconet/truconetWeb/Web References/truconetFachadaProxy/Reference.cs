@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace truconetDesktopWeb.truconetDomain {
+namespace truconetWeb.truconetFachadaProxy {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -26,15 +26,15 @@ namespace truconetDesktopWeb.truconetDomain {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="truconetDomainSoap", Namespace="http://truconet/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="truconetFachadaSoap", Namespace="http://truconet/")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Usuario))]
-    public partial class truconetDomain : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class truconetFachada : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private System.Threading.SendOrPostCallback obtenerJugadoresOperationCompleted;
         
         private System.Threading.SendOrPostCallback crearPartidoOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getJugadoresOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getJugadorPartidoOperationCompleted;
+        private System.Threading.SendOrPostCallback getjugadorPartidoOperationCompleted;
         
         private System.Threading.SendOrPostCallback getPartidoOperationCompleted;
         
@@ -45,8 +45,8 @@ namespace truconetDesktopWeb.truconetDomain {
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public truconetDomain() {
-            this.Url = global::truconetDesktopWeb.Properties.Settings.Default.truconetDesktopWeb_truconetDomain_truconetDomain;
+        public truconetFachada() {
+            this.Url = global::truconetWeb.Properties.Settings.Default.truconetWeb_truconetFachadaProxy_truconetFachada;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -81,13 +81,13 @@ namespace truconetDesktopWeb.truconetDomain {
         }
         
         /// <remarks/>
+        public event obtenerJugadoresCompletedEventHandler obtenerJugadoresCompleted;
+        
+        /// <remarks/>
         public event crearPartidoCompletedEventHandler crearPartidoCompleted;
         
         /// <remarks/>
-        public event getJugadoresCompletedEventHandler getJugadoresCompleted;
-        
-        /// <remarks/>
-        public event getJugadorPartidoCompletedEventHandler getJugadorPartidoCompleted;
+        public event getjugadorPartidoCompletedEventHandler getjugadorPartidoCompleted;
         
         /// <remarks/>
         public event getPartidoCompletedEventHandler getPartidoCompleted;
@@ -97,6 +97,33 @@ namespace truconetDesktopWeb.truconetDomain {
         
         /// <remarks/>
         public event borrarParticipanteCompletedEventHandler borrarParticipanteCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/obtenerJugadores", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Jugador[] obtenerJugadores() {
+            object[] results = this.Invoke("obtenerJugadores", new object[0]);
+            return ((Jugador[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void obtenerJugadoresAsync() {
+            this.obtenerJugadoresAsync(null);
+        }
+        
+        /// <remarks/>
+        public void obtenerJugadoresAsync(object userState) {
+            if ((this.obtenerJugadoresOperationCompleted == null)) {
+                this.obtenerJugadoresOperationCompleted = new System.Threading.SendOrPostCallback(this.OnobtenerJugadoresOperationCompleted);
+            }
+            this.InvokeAsync("obtenerJugadores", new object[0], this.obtenerJugadoresOperationCompleted, userState);
+        }
+        
+        private void OnobtenerJugadoresOperationCompleted(object arg) {
+            if ((this.obtenerJugadoresCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.obtenerJugadoresCompleted(this, new obtenerJugadoresCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/crearPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -126,58 +153,31 @@ namespace truconetDesktopWeb.truconetDomain {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getJugadores", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Jugador[] getJugadores() {
-            object[] results = this.Invoke("getJugadores", new object[0]);
-            return ((Jugador[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getJugadoresAsync() {
-            this.getJugadoresAsync(null);
-        }
-        
-        /// <remarks/>
-        public void getJugadoresAsync(object userState) {
-            if ((this.getJugadoresOperationCompleted == null)) {
-                this.getJugadoresOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetJugadoresOperationCompleted);
-            }
-            this.InvokeAsync("getJugadores", new object[0], this.getJugadoresOperationCompleted, userState);
-        }
-        
-        private void OngetJugadoresOperationCompleted(object arg) {
-            if ((this.getJugadoresCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getJugadoresCompleted(this, new getJugadoresCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getJugadorPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Jugador[] getJugadorPartido(int idPartido) {
-            object[] results = this.Invoke("getJugadorPartido", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getjugadorPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Jugador[] getjugadorPartido(int idPartido) {
+            object[] results = this.Invoke("getjugadorPartido", new object[] {
                         idPartido});
             return ((Jugador[])(results[0]));
         }
         
         /// <remarks/>
-        public void getJugadorPartidoAsync(int idPartido) {
-            this.getJugadorPartidoAsync(idPartido, null);
+        public void getjugadorPartidoAsync(int idPartido) {
+            this.getjugadorPartidoAsync(idPartido, null);
         }
         
         /// <remarks/>
-        public void getJugadorPartidoAsync(int idPartido, object userState) {
-            if ((this.getJugadorPartidoOperationCompleted == null)) {
-                this.getJugadorPartidoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetJugadorPartidoOperationCompleted);
+        public void getjugadorPartidoAsync(int idPartido, object userState) {
+            if ((this.getjugadorPartidoOperationCompleted == null)) {
+                this.getjugadorPartidoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetjugadorPartidoOperationCompleted);
             }
-            this.InvokeAsync("getJugadorPartido", new object[] {
-                        idPartido}, this.getJugadorPartidoOperationCompleted, userState);
+            this.InvokeAsync("getjugadorPartido", new object[] {
+                        idPartido}, this.getjugadorPartidoOperationCompleted, userState);
         }
         
-        private void OngetJugadorPartidoOperationCompleted(object arg) {
-            if ((this.getJugadorPartidoCompleted != null)) {
+        private void OngetjugadorPartidoOperationCompleted(object arg) {
+            if ((this.getjugadorPartidoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getJugadorPartidoCompleted(this, new getJugadorPartidoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getjugadorPartidoCompleted(this, new getjugadorPartidoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -635,6 +635,32 @@ namespace truconetDesktopWeb.truconetDomain {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
+    public delegate void obtenerJugadoresCompletedEventHandler(object sender, obtenerJugadoresCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class obtenerJugadoresCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal obtenerJugadoresCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Jugador[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Jugador[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
     public delegate void crearPartidoCompletedEventHandler(object sender, crearPartidoCompletedEventArgs e);
     
     /// <remarks/>
@@ -661,43 +687,17 @@ namespace truconetDesktopWeb.truconetDomain {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
-    public delegate void getJugadoresCompletedEventHandler(object sender, getJugadoresCompletedEventArgs e);
+    public delegate void getjugadorPartidoCompletedEventHandler(object sender, getjugadorPartidoCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getJugadoresCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getjugadorPartidoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getJugadoresCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Jugador[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Jugador[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
-    public delegate void getJugadorPartidoCompletedEventHandler(object sender, getJugadorPartidoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getJugadorPartidoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getJugadorPartidoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getjugadorPartidoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -61,5 +61,9 @@ namespace truconet
             get { return credencial; }
             set { credencial = value; }
         }
+        public override string ToString()
+        {
+            return this.Nombre + " " + this.apellido;
+        }
     }
 }
