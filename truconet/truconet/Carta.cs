@@ -84,7 +84,12 @@ namespace truconet
             set { jugador = value; }
         }
 
-
+        public void borrarDatos()
+        {
+            this.Categoria = 0;
+            this.Puntaje = 0;
+        
+        }
 
         private string strPalo()
         {
@@ -111,6 +116,11 @@ namespace truconet
         }
 
         public override string ToString()
+        {
+            return this.Numero + "-" + this.strPalo() ;
+        }
+
+        public string descCarta()
         {
             return this.Numero + "-" + this.strPalo();
         }

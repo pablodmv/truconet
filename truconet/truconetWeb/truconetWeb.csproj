@@ -55,7 +55,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="User.aspx" />
-    <None Include="Web References\truconetFachada\truconetFachada.disco" />
+    <None Include="Web References\truconetFachadaProxy\truconetFachada.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +79,7 @@
     <Compile Include="User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web References\truconetFachada\Reference.cs">
+    <Compile Include="Web References\truconetFachadaProxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -93,11 +93,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\truconetFachada\Reference.map">
+    <None Include="Web References\truconetFachadaProxy\Jugador.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\truconetFachadaProxy\Partido.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\truconetFachadaProxy\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\truconetFachada\truconetFachada.wsdl" />
+    <None Include="Web References\truconetFachadaProxy\truconetFachada.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -105,14 +111,14 @@
   <ItemGroup>
     <WebReferenceUrl Include="http://localhost:51052/truconetFachada.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\truconetFachada\</RelPath>
+      <RelPath>Web References\truconetFachadaProxy\</RelPath>
       <UpdateFromURL>http://localhost:51052/truconetFachada.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>truconetWeb_truconetFachada_truconetFachada</CachedSettingsPropName>
+      <CachedSettingsPropName>truconetWeb_truconetFachadaProxy_truconetFachada</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

@@ -8,10 +8,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDomainWs", "truconetDomainWs\truconetDomainWs.csproj", "{F69A72AE-A93A-488F-92A0-08C9532D00F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDesktop", "truconetDesktop\truconetDesktop.csproj", "{4E53DF16-0C4D-46D2-B626-A888B2A2D272}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8851E235-F9BE-499A-9BCA-ED3A645E1457} = {8851E235-F9BE-499A-9BCA-ED3A645E1457}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetWeb", "truconetWeb\truconetWeb.csproj", "{45F71516-79D5-415F-9275-1C29AB8D382F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8851E235-F9BE-499A-9BCA-ED3A645E1457} = {8851E235-F9BE-499A-9BCA-ED3A645E1457}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDesktopWeb", "truconetDesktopWeb\truconetDesktopWeb.csproj", "{8851E235-F9BE-499A-9BCA-ED3A645E1457}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F69A72AE-A93A-488F-92A0-08C9532D00F0} = {F69A72AE-A93A-488F-92A0-08C9532D00F0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

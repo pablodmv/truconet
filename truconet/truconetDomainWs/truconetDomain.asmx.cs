@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -22,18 +23,82 @@ namespace truconetDomainWs
     {
 
         [WebMethod]
-        public string crearPartido()
+        public int crearPartido()
         {
-            string retorno=""; 
-            truconet.Truco aux= truconet.Truco.getInstance();
+            truconet.Truco ws= truconet.Truco.getInstance();
+            int i=0;
+            int[] pepe = { 0, 1, };
+            return ws.iniciarPartido(pepe, "Partido" + i++);
 
-            foreach (truconet.Carta card in aux.Maso)
-            {
-                retorno += " " + card.ToString();
-                
-            }
-            return retorno;
              
         }
+
+        [WebMethod]
+        public List<truconet.Jugador> getJugadores()
+        {
+            truconet.Truco aux = truconet.Truco.getInstance();
+            //ArrayList jugadores = new ArrayList();
+            //foreach (truconet.Jugador jug in aux.ColJugadores)
+            //{
+            //    string Jugador = jug.Id + ":" + jug.Nombre + " " + jug.Apellido;
+            //    jugadores.Add(Jugador);
+            //}
+            //return jugadores;
+            return aux.ColJugadores;
+             
+
+        }
+
+        [WebMethod]
+        public List<truconet.Jugador> getJugadorPartido(int idPartido)
+        {
+            truconet.Truco ws = truconet.Truco.getInstance();
+            return ws.participantesPartido(idPartido);
+        
+        }
+
+        [WebMethod]
+        public truconet.Partido getPartido(int idPartido)
+        {
+            truconet.Truco ws = truconet.Truco.getInstance();
+            return ws.getPartido(idPartido);
+        
+        }
+
+
+        [WebMethod]
+        public List<truconet.Partido> getPartidosPendientes()
+        {
+            truconet.Truco ws = truconet.Truco.getInstance();
+            return ws.getPartidosPendientes();
+        
+        }
+
+
+        [WebMethod]
+        public bool borrarParticipante(int idJugador, int idPartido)
+        {
+            truconet.Truco ws = truconet.Truco.getInstance();
+            return ws.borrarParticipante(idJugador,idPartido);
+
+        }
+
+
+        //[WebMethod]
+        //public string obtenerCarta()
+        //{
+        //    truconet.Carta aux = new truconet.Carta();
+        //    return aux.descCarta();
+
+
+        //}
+
+
+
+
+
+
+
+
     }
 }

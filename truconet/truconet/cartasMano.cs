@@ -10,12 +10,18 @@ namespace truconet
         private List<Carta> cartas = new List<Carta>();
         private int jugada = 0; //1-Flor, 2-Envido
         private int puntos = 0;
+        private int idPartido;
 
+     
 
+        public cartasMano(int idPartido)
+        {
+            this.idPartido = idPartido;
+        }
         public cartasMano()
         {
-        }
 
+        }
         #region Metodos_Accesores
 
 
@@ -36,6 +42,13 @@ namespace truconet
             get { return cartas; }
             set { cartas = value; }
         }
+
+        public int IdPartido
+        {
+            get { return idPartido; }
+            set { idPartido = value; }
+        }
+
 
         #endregion
 
@@ -314,5 +327,11 @@ namespace truconet
         {
             return cartas[0].ToString() + " - " + cartas[1].ToString() + " - " + cartas[2].ToString();
         }
+
+        public void BorroCartas()
+        {
+            this.cartas.Clear(); ;
+        }
+
     }
 }
