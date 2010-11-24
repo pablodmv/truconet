@@ -3,29 +3,48 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://truconet/">
       <s:element name="crearPartido">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idJugadores" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="crearPartidoResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="crearPartidoResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="crearPartidoResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="consultaUsuario">
+      <s:element name="getJugadores">
         <s:complexType />
       </s:element>
-      <s:element name="consultaUsuarioResponse">
+      <s:element name="getJugadoresResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="consultaUsuarioResult" type="tns:ArrayOfUsuario" />
+            <s:element minOccurs="0" maxOccurs="1" name="getJugadoresResult" type="tns:ArrayOfJugador" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfUsuario">
+      <s:complexType name="ArrayOfJugador">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Jugador" nillable="true" type="tns:Jugador" />
         </s:sequence>
+      </s:complexType>
+      <s:complexType name="Jugador">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Usuario">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Mano" type="tns:cartasMano" />
+              <s:element minOccurs="1" maxOccurs="1" name="EsMano" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
       </s:complexType>
       <s:complexType name="Usuario">
         <s:sequence>
@@ -36,54 +55,12 @@
           <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="consultaPartidoEnCurso">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="enCurso" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="consultaPartidoEnCursoResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="consultaPartidoEnCursoResult" type="tns:ArrayOfPartido" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfPartido">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Partido" nillable="true" type="tns:Partido" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="Partido">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="Ganadores" type="tns:ArrayOfJugador" />
-          <s:element minOccurs="1" maxOccurs="1" name="FechaFin" type="s:dateTime" />
-          <s:element minOccurs="1" maxOccurs="1" name="FechaInicio" type="s:dateTime" />
-          <s:element minOccurs="0" maxOccurs="1" name="Participantes" type="tns:ArrayOfJugador" />
-          <s:element minOccurs="1" maxOccurs="1" name="Identificador" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="Muestra" type="tns:Carta" />
-          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="MasoJuego" type="tns:ArrayOfCarta" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="ArrayOfJugador">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Jugador" nillable="true" type="tns:Jugador" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="Jugador">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Mano" type="tns:cartasMano" />
-          <s:element minOccurs="1" maxOccurs="1" name="EsMano" type="s:boolean" />
-        </s:sequence>
-      </s:complexType>
       <s:complexType name="cartasMano">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="Puntos" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="Jugada" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Cartas" type="tns:ArrayOfCarta" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdPartido" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfCarta">
@@ -101,78 +78,86 @@
           <s:element minOccurs="0" maxOccurs="1" name="Jugador" type="tns:Jugador" />
         </s:sequence>
       </s:complexType>
-      <s:element name="consultaPartidoRangos">
+      <s:element name="getJugadorPartido">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="fechaIni" type="s:dateTime" />
-            <s:element minOccurs="1" maxOccurs="1" name="fechaFin" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="idPartido" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="consultaPartidoRangosResponse">
+      <s:element name="getJugadorPartidoResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="consultaPartidoRangosResult" type="tns:ArrayOfPartido" />
+            <s:element minOccurs="0" maxOccurs="1" name="getJugadorPartidoResult" type="tns:ArrayOfJugador" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="consultaPartidoJugadores">
+      <s:element name="getPartido">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="listaJugadores" type="tns:ArrayOfJugador" />
+            <s:element minOccurs="1" maxOccurs="1" name="idPartido" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="consultaPartidoJugadoresResponse">
+      <s:element name="getPartidoResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="consultaPartidoJugadoresResult" type="tns:ArrayOfPartido" />
+            <s:element minOccurs="0" maxOccurs="1" name="getPartidoResult" type="tns:Partido" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="consultaRanking">
+      <s:complexType name="Partido">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ganadores" type="tns:ArrayOfJugador" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaFin" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaInicio" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Participantes" type="tns:ArrayOfJugador" />
+          <s:element minOccurs="1" maxOccurs="1" name="Identificador" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Muestra" type="tns:Carta" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getPartidosPendientes">
         <s:complexType />
       </s:element>
-      <s:element name="consultaRankingResponse">
+      <s:element name="getPartidosPendientesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="consultaRankingResult" type="tns:ArrayOfRanking" />
+            <s:element minOccurs="0" maxOccurs="1" name="getPartidosPendientesResult" type="tns:ArrayOfPartido" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfRanking">
+      <s:complexType name="ArrayOfPartido">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Ranking" nillable="true" type="tns:Ranking" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Partido" nillable="true" type="tns:Partido" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="Ranking">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Puntaje" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Jug" type="tns:Jugador" />
-          <s:element minOccurs="1" maxOccurs="1" name="Posicion" type="s:int" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="consultaDenuncia">
+      <s:element name="borrarParticipante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idJugador" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idPartido" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="borrarParticipanteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="borrarParticipanteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="altaCredencial">
         <s:complexType />
       </s:element>
-      <s:element name="consultaDenunciaResponse">
+      <s:element name="altaCredencialResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="consultaDenunciaResult" type="tns:ArrayOfDenuncia" />
+            <s:element minOccurs="1" maxOccurs="1" name="altaCredencialResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfDenuncia">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Denuncia" nillable="true" type="tns:Denuncia" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="Denuncia">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="DesDenuncia" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="CodDenuncia" type="s:int" />
-        </s:sequence>
-      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="crearPartidoSoapIn">
@@ -181,70 +166,70 @@
   <wsdl:message name="crearPartidoSoapOut">
     <wsdl:part name="parameters" element="tns:crearPartidoResponse" />
   </wsdl:message>
-  <wsdl:message name="consultaUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:consultaUsuario" />
+  <wsdl:message name="getJugadoresSoapIn">
+    <wsdl:part name="parameters" element="tns:getJugadores" />
   </wsdl:message>
-  <wsdl:message name="consultaUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:consultaUsuarioResponse" />
+  <wsdl:message name="getJugadoresSoapOut">
+    <wsdl:part name="parameters" element="tns:getJugadoresResponse" />
   </wsdl:message>
-  <wsdl:message name="consultaPartidoEnCursoSoapIn">
-    <wsdl:part name="parameters" element="tns:consultaPartidoEnCurso" />
+  <wsdl:message name="getJugadorPartidoSoapIn">
+    <wsdl:part name="parameters" element="tns:getJugadorPartido" />
   </wsdl:message>
-  <wsdl:message name="consultaPartidoEnCursoSoapOut">
-    <wsdl:part name="parameters" element="tns:consultaPartidoEnCursoResponse" />
+  <wsdl:message name="getJugadorPartidoSoapOut">
+    <wsdl:part name="parameters" element="tns:getJugadorPartidoResponse" />
   </wsdl:message>
-  <wsdl:message name="consultaPartidoRangosSoapIn">
-    <wsdl:part name="parameters" element="tns:consultaPartidoRangos" />
+  <wsdl:message name="getPartidoSoapIn">
+    <wsdl:part name="parameters" element="tns:getPartido" />
   </wsdl:message>
-  <wsdl:message name="consultaPartidoRangosSoapOut">
-    <wsdl:part name="parameters" element="tns:consultaPartidoRangosResponse" />
+  <wsdl:message name="getPartidoSoapOut">
+    <wsdl:part name="parameters" element="tns:getPartidoResponse" />
   </wsdl:message>
-  <wsdl:message name="consultaPartidoJugadoresSoapIn">
-    <wsdl:part name="parameters" element="tns:consultaPartidoJugadores" />
+  <wsdl:message name="getPartidosPendientesSoapIn">
+    <wsdl:part name="parameters" element="tns:getPartidosPendientes" />
   </wsdl:message>
-  <wsdl:message name="consultaPartidoJugadoresSoapOut">
-    <wsdl:part name="parameters" element="tns:consultaPartidoJugadoresResponse" />
+  <wsdl:message name="getPartidosPendientesSoapOut">
+    <wsdl:part name="parameters" element="tns:getPartidosPendientesResponse" />
   </wsdl:message>
-  <wsdl:message name="consultaRankingSoapIn">
-    <wsdl:part name="parameters" element="tns:consultaRanking" />
+  <wsdl:message name="borrarParticipanteSoapIn">
+    <wsdl:part name="parameters" element="tns:borrarParticipante" />
   </wsdl:message>
-  <wsdl:message name="consultaRankingSoapOut">
-    <wsdl:part name="parameters" element="tns:consultaRankingResponse" />
+  <wsdl:message name="borrarParticipanteSoapOut">
+    <wsdl:part name="parameters" element="tns:borrarParticipanteResponse" />
   </wsdl:message>
-  <wsdl:message name="consultaDenunciaSoapIn">
-    <wsdl:part name="parameters" element="tns:consultaDenuncia" />
+  <wsdl:message name="altaCredencialSoapIn">
+    <wsdl:part name="parameters" element="tns:altaCredencial" />
   </wsdl:message>
-  <wsdl:message name="consultaDenunciaSoapOut">
-    <wsdl:part name="parameters" element="tns:consultaDenunciaResponse" />
+  <wsdl:message name="altaCredencialSoapOut">
+    <wsdl:part name="parameters" element="tns:altaCredencialResponse" />
   </wsdl:message>
   <wsdl:portType name="truconetDomainSoap">
     <wsdl:operation name="crearPartido">
       <wsdl:input message="tns:crearPartidoSoapIn" />
       <wsdl:output message="tns:crearPartidoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="consultaUsuario">
-      <wsdl:input message="tns:consultaUsuarioSoapIn" />
-      <wsdl:output message="tns:consultaUsuarioSoapOut" />
+    <wsdl:operation name="getJugadores">
+      <wsdl:input message="tns:getJugadoresSoapIn" />
+      <wsdl:output message="tns:getJugadoresSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoEnCurso">
-      <wsdl:input message="tns:consultaPartidoEnCursoSoapIn" />
-      <wsdl:output message="tns:consultaPartidoEnCursoSoapOut" />
+    <wsdl:operation name="getJugadorPartido">
+      <wsdl:input message="tns:getJugadorPartidoSoapIn" />
+      <wsdl:output message="tns:getJugadorPartidoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoRangos">
-      <wsdl:input message="tns:consultaPartidoRangosSoapIn" />
-      <wsdl:output message="tns:consultaPartidoRangosSoapOut" />
+    <wsdl:operation name="getPartido">
+      <wsdl:input message="tns:getPartidoSoapIn" />
+      <wsdl:output message="tns:getPartidoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoJugadores">
-      <wsdl:input message="tns:consultaPartidoJugadoresSoapIn" />
-      <wsdl:output message="tns:consultaPartidoJugadoresSoapOut" />
+    <wsdl:operation name="getPartidosPendientes">
+      <wsdl:input message="tns:getPartidosPendientesSoapIn" />
+      <wsdl:output message="tns:getPartidosPendientesSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="consultaRanking">
-      <wsdl:input message="tns:consultaRankingSoapIn" />
-      <wsdl:output message="tns:consultaRankingSoapOut" />
+    <wsdl:operation name="borrarParticipante">
+      <wsdl:input message="tns:borrarParticipanteSoapIn" />
+      <wsdl:output message="tns:borrarParticipanteSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="consultaDenuncia">
-      <wsdl:input message="tns:consultaDenunciaSoapIn" />
-      <wsdl:output message="tns:consultaDenunciaSoapOut" />
+    <wsdl:operation name="altaCredencial">
+      <wsdl:input message="tns:altaCredencialSoapIn" />
+      <wsdl:output message="tns:altaCredencialSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="truconetDomainSoap" type="tns:truconetDomainSoap">
@@ -258,8 +243,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaUsuario">
-      <soap:operation soapAction="http://truconet/consultaUsuario" style="document" />
+    <wsdl:operation name="getJugadores">
+      <soap:operation soapAction="http://truconet/getJugadores" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -267,8 +252,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoEnCurso">
-      <soap:operation soapAction="http://truconet/consultaPartidoEnCurso" style="document" />
+    <wsdl:operation name="getJugadorPartido">
+      <soap:operation soapAction="http://truconet/getJugadorPartido" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -276,8 +261,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoRangos">
-      <soap:operation soapAction="http://truconet/consultaPartidoRangos" style="document" />
+    <wsdl:operation name="getPartido">
+      <soap:operation soapAction="http://truconet/getPartido" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -285,8 +270,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoJugadores">
-      <soap:operation soapAction="http://truconet/consultaPartidoJugadores" style="document" />
+    <wsdl:operation name="getPartidosPendientes">
+      <soap:operation soapAction="http://truconet/getPartidosPendientes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -294,8 +279,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaRanking">
-      <soap:operation soapAction="http://truconet/consultaRanking" style="document" />
+    <wsdl:operation name="borrarParticipante">
+      <soap:operation soapAction="http://truconet/borrarParticipante" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -303,8 +288,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaDenuncia">
-      <soap:operation soapAction="http://truconet/consultaDenuncia" style="document" />
+    <wsdl:operation name="altaCredencial">
+      <soap:operation soapAction="http://truconet/altaCredencial" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -324,8 +309,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaUsuario">
-      <soap12:operation soapAction="http://truconet/consultaUsuario" style="document" />
+    <wsdl:operation name="getJugadores">
+      <soap12:operation soapAction="http://truconet/getJugadores" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -333,8 +318,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoEnCurso">
-      <soap12:operation soapAction="http://truconet/consultaPartidoEnCurso" style="document" />
+    <wsdl:operation name="getJugadorPartido">
+      <soap12:operation soapAction="http://truconet/getJugadorPartido" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -342,8 +327,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoRangos">
-      <soap12:operation soapAction="http://truconet/consultaPartidoRangos" style="document" />
+    <wsdl:operation name="getPartido">
+      <soap12:operation soapAction="http://truconet/getPartido" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -351,8 +336,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaPartidoJugadores">
-      <soap12:operation soapAction="http://truconet/consultaPartidoJugadores" style="document" />
+    <wsdl:operation name="getPartidosPendientes">
+      <soap12:operation soapAction="http://truconet/getPartidosPendientes" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -360,8 +345,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaRanking">
-      <soap12:operation soapAction="http://truconet/consultaRanking" style="document" />
+    <wsdl:operation name="borrarParticipante">
+      <soap12:operation soapAction="http://truconet/borrarParticipante" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -369,8 +354,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="consultaDenuncia">
-      <soap12:operation soapAction="http://truconet/consultaDenuncia" style="document" />
+    <wsdl:operation name="altaCredencial">
+      <soap12:operation soapAction="http://truconet/altaCredencial" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -381,10 +366,10 @@
   </wsdl:binding>
   <wsdl:service name="truconetDomain">
     <wsdl:port name="truconetDomainSoap" binding="tns:truconetDomainSoap">
-      <soap:address location="http://localhost:50435/truconetDomain.asmx" />
+      <soap:address location="http://localhost:50436/truconetDomain.asmx" />
     </wsdl:port>
     <wsdl:port name="truconetDomainSoap12" binding="tns:truconetDomainSoap12">
-      <soap12:address location="http://localhost:50435/truconetDomain.asmx" />
+      <soap12:address location="http://localhost:50436/truconetDomain.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
