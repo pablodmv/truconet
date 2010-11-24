@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace truconetDesktop.Properties {
+namespace TrucoNetBackend.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -26,10 +26,10 @@ namespace truconetDesktop.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51052/truconetFachada.asmx")]
-        public string truconetDesktop_localhost_truconetFachada {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:50435/truconetDomain.asmx")]
+        public string TrucoNetBackend_truconetDomain_truconetDomain {
             get {
-                return ((string)(this["truconetDesktop_localhost_truconetFachada"]));
+                return ((string)(this["TrucoNetBackend_truconetDomain_truconetDomain"]));
             }
         }
     }

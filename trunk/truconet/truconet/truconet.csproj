@@ -66,6 +66,12 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\truconetPersistente\truconetPersistente.csproj">
+      <Project>{F21C3B4A-8427-4706-8CF6-092BC6C91174}</Project>
+      <Name>truconetPersistente</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
