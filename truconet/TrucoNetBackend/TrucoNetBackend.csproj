@@ -74,13 +74,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\truconetDomain\truconetDomain.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:50435/truconetDomain.asmx">
+    <WebReferenceUrl Include="http://localhost:50436/truconetDomain.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\truconetDomain\</RelPath>
-      <UpdateFromURL>http://localhost:50435/truconetDomain.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:50436/truconetDomain.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -90,13 +89,10 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\truconetDomain\Denuncia.datasource">
+    <None Include="Web References\truconetDomain\Jugador.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\truconetDomain\Partido.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\truconetDomain\Ranking.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\truconetDomain\Reference.map">
@@ -104,9 +100,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\truconetDomain\truconetDomain.disco" />
-    <None Include="Web References\truconetDomain\Usuario.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
+    <None Include="Web References\truconetDomain\truconetDomain.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

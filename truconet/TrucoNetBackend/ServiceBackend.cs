@@ -36,10 +36,13 @@ namespace TrucoNetBackend
         public static List<Usuario> consultaUsuario()
         {
             truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
-            
-            
+
+
             //TODO Llamar a web-service para realizar CONSULTA USUARIO
-            return ws.consultaUsuario();
+            //return ws.consultaUsuario();
+            List<truconetDomain.Usuario> pepe = new List<truconetDomain.Usuario>();
+            return pepe;
+                
         }
 
 
@@ -62,32 +65,32 @@ namespace TrucoNetBackend
             return true;
         }
 
-        public static List<Partido> consultaPartido(Boolean enCurso)
+        public static List<truconetDomain.Partido> consultaPartido()
         {
             //TODO Llamar a web-service para realizar CONSULTA PARTIDO (En CURSO/TERMINDADO)
             truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
-           
-            return ws.consultaPartidoEnCurso(enCurso);
+            List<truconetDomain.Partido> partidos = new List<truconetDomain.Partido>(ws.getPartidosPendientes());
+            return partidos;
         }
 
-        public static List<Partido> consultaPartido(DateTime fechaIni, DateTime fechaFin)
-        {
-            //TODO Llamar a web-service para realizar CONSULTA PARTIDO (RANGO DE FECHAS)
-            truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
+        //public static List<Partido> consultaPartido(DateTime fechaIni, DateTime fechaFin)
+        //{
+        //    //TODO Llamar a web-service para realizar CONSULTA PARTIDO (RANGO DE FECHAS)
+        //    truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
 
-            return ws.consultaPartidoRangos(fechaIni, fechaFin);
+        //    return ws.consultaPartidoRangos(fechaIni, fechaFin);
 
-        }
+        //}
 
 
-        public static List<Partido> consultaPartido(List<Jugador> listaJugadores)
-        {
-            //TODO Llamar a web-service para realizar CONSULTA PARTIDO (JUGADOR/ES)
-            truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
+        //public static List<Partido> consultaPartido(List<Jugador> listaJugadores)
+        //{
+        //    //TODO Llamar a web-service para realizar CONSULTA PARTIDO (JUGADOR/ES)
+        //    truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
 
-            return ws.consultaPartidoJugadores(listaJugadores);
+        //    return ws.consultaPartidoJugadores(listaJugadores);
 
-        }
+        //}
 
 
         public static Boolean altaRanking(String nick, String puntaje)
@@ -108,12 +111,12 @@ namespace TrucoNetBackend
             return true;
         }
 
-        public static List<Ranking> consultaRanking()
-        {
-            //TODO Llamar a web-service para realizar CONSULTA RANKING
-            List<Ranking> listaRanking = new List<Ranking>();
-            return listaRanking;
-        }
+        //public static List<truconetDomain.Ranking> consultaRanking()
+        //{
+        //    //TODO Llamar a web-service para realizar CONSULTA RANKING
+        //    List<truconetDomain.Ranking> listaRanking = new List<truconetDomain.Ranking>();
+        //    return listaRanking;
+        //}
 
         public static Boolean altaDenuncia(String descripcion)
         {
@@ -133,12 +136,12 @@ namespace TrucoNetBackend
             return true;
         }
 
-        public static List<Denuncia> consultaDenuncia(){
-            //TODO Llamar a web-service para realizar CONSULTA DENUNCIA
-            List<Denuncia> listaDenuncias = new List<Denuncia>();
+        //public static List<truconetDomain.Denuncia> consultaDenuncia(){
+        //    //TODO Llamar a web-service para realizar CONSULTA DENUNCIA
+        //    List<truconetDomain.Denuncia> listaDenuncias = new List<truconetDomain.Denuncia>();
 
-            return listaDenuncias;
-        }
+        //    return listaDenuncias;
+        //}
 
     }
 }

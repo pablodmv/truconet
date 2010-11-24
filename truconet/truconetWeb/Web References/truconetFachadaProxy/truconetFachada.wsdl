@@ -60,8 +60,17 @@
         </s:sequence>
       </s:complexType>
       <s:element name="crearPartido">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idJugadores" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="crearPartidoResponse">
         <s:complexType>
           <s:sequence>

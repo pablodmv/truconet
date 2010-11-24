@@ -3,8 +3,17 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://truconet/">
       <s:element name="crearPartido">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idJugadores" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="crearPartidoResponse">
         <s:complexType>
           <s:sequence>
@@ -319,10 +328,10 @@
   </wsdl:binding>
   <wsdl:service name="truconetDomain">
     <wsdl:port name="truconetDomainSoap" binding="tns:truconetDomainSoap">
-      <soap:address location="http://localhost:50435/truconetDomain.asmx" />
+      <soap:address location="http://localhost:50436/truconetDomain.asmx" />
     </wsdl:port>
     <wsdl:port name="truconetDomainSoap12" binding="tns:truconetDomainSoap12">
-      <soap12:address location="http://localhost:50435/truconetDomain.asmx" />
+      <soap12:address location="http://localhost:50436/truconetDomain.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

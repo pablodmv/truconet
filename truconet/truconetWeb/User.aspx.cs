@@ -11,20 +11,19 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using System.Web.Util;
+
 
 namespace truconetWeb
 {
     public partial class User : System.Web.UI.Page
     {
-                   
+
+        public static bool pepe = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.cargarJugadorSistema();
-
-            
-            
-            
+           
         }
 
         //protected void btnCartas_Click(object sender, EventArgs e)
@@ -46,14 +45,14 @@ namespace truconetWeb
 
         public void cargarJugadorSistema()
         {
-            this.lsbJugSistema.Items.Clear();
+            this.listaJugSistema.Items.Clear();
             truconetFachadaProxy.truconetFachada ws = new truconetFachadaProxy.truconetFachada();
             //List<truconetFachadaProxy.Jugador> jugSistema = new List<truconetFachadaProxy.Jugador>(ws.obtenerJugadores());
             List<truconetFachadaProxy.Jugador> jugadores = new List<truconetFachadaProxy.Jugador>();
             jugadores = new List<truconetFachadaProxy.Jugador>(ws.obtenerJugadores());
             foreach (truconetFachadaProxy.Jugador jug in ws.obtenerJugadores())
             {
-                this.lsbJugSistema.Items.Add(jug.Nombre + " " + jug.Apellido);
+                this.listaJugSistema.Items.Add(jug.Id + ":"+jug.Nombre + " " + jug.Apellido);
 
             }
         
@@ -76,9 +75,20 @@ namespace truconetWeb
         {
             this.TextBox1.Text = "";
             truconetFachadaProxy.truconetFachada ws = new truconetFachadaProxy.truconetFachada();
-            this.lbIdPartido.Text = ws.crearPartido().ToString();
+            ArrayList items = new ArrayList(this.listaInvitados.Items);
+            int[] idJugador = new int[items.Count];
+            char[] p = { ':' };
+            for (int i = 0; i < items.Count; i++)
+            {
+                idJugador[i] = int.Parse(items[i].ToString().Split(p)[0]);
+                
+            }
+            ws.crearPartido(idJugador);
+            //this.lbIdPartido.Text = ws.crearPartido().ToString();
             this.cargarListParticipantes();
             this.cargarPartidos();
+            this.cargarJugadorSistema();
+           // Page.ClientScript.RegisterStartupScript(typeof(Page), "myScript", "alert('Your Alert Message')", true);
             
         }
 
@@ -117,12 +127,14 @@ namespace truconetWeb
                 foreach (truconetFachadaProxy.Carta carta in Jug.Mano.Cartas)
                 {
                     
-                    this.TextBox1.Text += carta.Numero + " " + carta.Palo + " Cat: " + carta.Categoria + " P: " + carta.Puntaje + " -- ";
+                    //this.TextBox1.Text += carta.Numero + " " + carta.Palo + " Cat: " + carta.Categoria + " P: " + carta.Puntaje + " -- ";
+                    this.TextBox1.Text += this.descCarta(carta)+ " ";
                 }
+                this.TextBox1.Text += " ### Jugada: " +Jug.Mano.Jugada.ToString() + " P: " + Jug.Mano.Puntos.ToString() + " ";
 
                 
             }
-            this.TextBox1.Text += " Muestra: " + ws.getPartido(idPartido).Muestra.Palo;
+            this.lbMuestra.Text = this.descCarta( ws.getPartido(idPartido).Muestra);
             //int tmpcard = ws.getPartido(int.Parse(this.idPartido.Text)).MasoJuego.Length;
             //this.TextBox1.Text = tmpcard.ToString();
            // this.TextBox1.Text = jugadores[0].Mano.Cartas[0].Numero + " " + jugadores[0].Mano.Cartas[0].Palo;
@@ -142,6 +154,78 @@ namespace truconetWeb
             this.lbIdPartido.Text = this.lstPartidos.SelectedItem.Text.Split(p)[0];
             this.cargarListParticipantes();
 
+        }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            char[] p = { ':' };
+            //string seleccion = this.listaJugSistema.SelectedItem.Text.Split(p)[0];
+            //this.lbIdPartido.Text = ;
+            //int hola = this.listaJugSistema.Items.Count;
+            if (!(this.listaInvitados.Items.Contains(this.listaJugSistema.SelectedItem)))
+            {
+                this.listaInvitados.Items.Add(this.listaJugSistema.SelectedItem.Text);     
+            }
+            
+        }
+
+        protected void lsbJugSistema_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void listaInvitados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            this.TextBox1.Text = "";
+            truconetFachadaProxy.truconetFachada ws = new truconetFachadaProxy.truconetFachada();
+            int[] pepe = { 0, 1 };
+            this.lbIdPartido.Text = ws.crearPartido(pepe).ToString();
+            this.cargarListParticipantes();
+            this.cargarPartidos();
+            this.cargarJugadorSistema();
+        }
+
+
+
+
+        private string strPalo(int palo)
+        {
+            if (palo == 1)
+            {
+                return "Oro";
+            }
+
+            if (palo == 2)
+            {
+                return "Copa";
+            }
+
+            if (palo == 3)
+            {
+                return "Basto";
+            }
+
+            if (palo == 4)
+            {
+                return "Espada";
+            }
+            return "Sin palo";
+        }
+
+       
+        public string descCarta(truconetFachadaProxy.Carta carta)
+        {
+            return carta.Numero + "-" + this.strPalo(carta.Palo);// +carta.Categoria.ToString() + carta.Puntaje.ToString();
         }
 
        

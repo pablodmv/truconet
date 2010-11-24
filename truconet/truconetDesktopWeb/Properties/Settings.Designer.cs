@@ -26,7 +26,7 @@ namespace truconetDesktopWeb.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:50435/truconetDomain.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:50436/truconetDomain.asmx")]
         public string truconetDesktopWeb_truconetDomain_truconetDomain {
             get {
                 return ((string)(this["truconetDesktopWeb_truconetDomain_truconetDomain"]));

@@ -202,28 +202,34 @@ namespace truconet
             {
                 foreach (Carta card in jug.getCartas())
                 {
+                    card.Categoria = 0; //Limpia la categoria anterior
                     if (card.Palo == muestra.Palo && pieza.Contains(card.Numero)) //si son del mismo palo me fijo el numero
                     {
                         //if (pieza.Contains(card.Numero))
                         //{
-                            card.Categoria = 1; //Es pieza
+                            
                             //Seteo Puntaje
                             switch (card.Numero)
                             {
                                 case 2:
                                     card.Puntaje = 30;
+                                    card.Categoria = 1; //Es pieza
                                     break;
                                 case 4:
                                     card.Puntaje = 29;
+                                    card.Categoria = 1; //Es pieza
                                     break;
                                 case 5:
                                     card.Puntaje = 28;
+                                    card.Categoria = 1; //Es pieza
                                     break;
                                 case 10:
                                     card.Puntaje = 27;
+                                    card.Categoria = 1; //Es pieza
                                     break;
                                 case 11:
                                     card.Puntaje = 27;
+                                    card.Categoria = 1; //Es pieza
                                     break;
                                 case 12:
                                     if (pieza.Contains(muestra.Numero))
@@ -232,18 +238,23 @@ namespace truconet
                                         {
                                             case 2:
                                                 card.Puntaje = 30;
+                                                card.Categoria = 1; //Es pieza
                                                 break;
                                             case 4:
                                                 card.Puntaje = 29;
+                                                card.Categoria = 1; //Es pieza
                                                 break;
                                             case 5:
                                                 card.Puntaje = 28;
+                                                card.Categoria = 1; //Es pieza
                                                 break;
                                             case 10:
                                                 card.Puntaje = 27;
+                                                card.Categoria = 1; //Es pieza
                                                 break;
                                             case 11:
                                                 card.Puntaje = 27;
+                                                card.Categoria = 1; //Es pieza
                                                 break;
                                         }    
                                     };
@@ -273,6 +284,7 @@ namespace truconet
                         card.Categoria = 99; //Error. Debe salir con alguna categoria !=0
                     }
                 }
+                jug.Mano.chequearJugada(); //chequeo la jugada
             }
         }
         

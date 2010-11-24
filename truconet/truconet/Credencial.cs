@@ -51,6 +51,7 @@ namespace truconet
 
         public Boolean alta(){
             this.credPersist.alta();
+            return true;
         }
 
     }

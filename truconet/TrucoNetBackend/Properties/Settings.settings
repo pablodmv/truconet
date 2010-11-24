@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="TrucoNetBackend_truconetDomain_truconetDomain" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:50435/truconetDomain.asmx</Value>
+      <Value Profile="(Default)">http://localhost:50436/truconetDomain.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
