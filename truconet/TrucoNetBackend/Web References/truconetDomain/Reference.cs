@@ -27,21 +27,22 @@ namespace TrucoNetBackend.truconetDomain {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="truconetDomainSoap", Namespace="http://truconet/")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Usuario))]
     public partial class truconetDomain : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback crearPartidoOperationCompleted;
         
-        private System.Threading.SendOrPostCallback consultaUsuarioOperationCompleted;
+        private System.Threading.SendOrPostCallback getJugadoresOperationCompleted;
         
-        private System.Threading.SendOrPostCallback consultaPartidoEnCursoOperationCompleted;
+        private System.Threading.SendOrPostCallback getJugadorPartidoOperationCompleted;
         
-        private System.Threading.SendOrPostCallback consultaPartidoRangosOperationCompleted;
+        private System.Threading.SendOrPostCallback getPartidoOperationCompleted;
         
-        private System.Threading.SendOrPostCallback consultaPartidoJugadoresOperationCompleted;
+        private System.Threading.SendOrPostCallback getPartidosPendientesOperationCompleted;
         
-        private System.Threading.SendOrPostCallback consultaRankingOperationCompleted;
+        private System.Threading.SendOrPostCallback borrarParticipanteOperationCompleted;
         
-        private System.Threading.SendOrPostCallback consultaDenunciaOperationCompleted;
+        private System.Threading.SendOrPostCallback altaCredencialOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -85,41 +86,43 @@ namespace TrucoNetBackend.truconetDomain {
         public event crearPartidoCompletedEventHandler crearPartidoCompleted;
         
         /// <remarks/>
-        public event consultaUsuarioCompletedEventHandler consultaUsuarioCompleted;
+        public event getJugadoresCompletedEventHandler getJugadoresCompleted;
         
         /// <remarks/>
-        public event consultaPartidoEnCursoCompletedEventHandler consultaPartidoEnCursoCompleted;
+        public event getJugadorPartidoCompletedEventHandler getJugadorPartidoCompleted;
         
         /// <remarks/>
-        public event consultaPartidoRangosCompletedEventHandler consultaPartidoRangosCompleted;
+        public event getPartidoCompletedEventHandler getPartidoCompleted;
         
         /// <remarks/>
-        public event consultaPartidoJugadoresCompletedEventHandler consultaPartidoJugadoresCompleted;
+        public event getPartidosPendientesCompletedEventHandler getPartidosPendientesCompleted;
         
         /// <remarks/>
-        public event consultaRankingCompletedEventHandler consultaRankingCompleted;
+        public event borrarParticipanteCompletedEventHandler borrarParticipanteCompleted;
         
         /// <remarks/>
-        public event consultaDenunciaCompletedEventHandler consultaDenunciaCompleted;
+        public event altaCredencialCompletedEventHandler altaCredencialCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/crearPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string crearPartido() {
-            object[] results = this.Invoke("crearPartido", new object[0]);
-            return ((string)(results[0]));
+        public int crearPartido(int[] idJugadores) {
+            object[] results = this.Invoke("crearPartido", new object[] {
+                        idJugadores});
+            return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void crearPartidoAsync() {
-            this.crearPartidoAsync(null);
+        public void crearPartidoAsync(int[] idJugadores) {
+            this.crearPartidoAsync(idJugadores, null);
         }
         
         /// <remarks/>
-        public void crearPartidoAsync(object userState) {
+        public void crearPartidoAsync(int[] idJugadores, object userState) {
             if ((this.crearPartidoOperationCompleted == null)) {
                 this.crearPartidoOperationCompleted = new System.Threading.SendOrPostCallback(this.OncrearPartidoOperationCompleted);
             }
-            this.InvokeAsync("crearPartido", new object[0], this.crearPartidoOperationCompleted, userState);
+            this.InvokeAsync("crearPartido", new object[] {
+                        idJugadores}, this.crearPartidoOperationCompleted, userState);
         }
         
         private void OncrearPartidoOperationCompleted(object arg) {
@@ -130,172 +133,172 @@ namespace TrucoNetBackend.truconetDomain {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/consultaUsuario", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Usuario[] consultaUsuario() {
-            object[] results = this.Invoke("consultaUsuario", new object[0]);
-            return ((Usuario[])(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getJugadores", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Jugador[] getJugadores() {
+            object[] results = this.Invoke("getJugadores", new object[0]);
+            return ((Jugador[])(results[0]));
         }
         
         /// <remarks/>
-        public void consultaUsuarioAsync() {
-            this.consultaUsuarioAsync(null);
+        public void getJugadoresAsync() {
+            this.getJugadoresAsync(null);
         }
         
         /// <remarks/>
-        public void consultaUsuarioAsync(object userState) {
-            if ((this.consultaUsuarioOperationCompleted == null)) {
-                this.consultaUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaUsuarioOperationCompleted);
+        public void getJugadoresAsync(object userState) {
+            if ((this.getJugadoresOperationCompleted == null)) {
+                this.getJugadoresOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetJugadoresOperationCompleted);
             }
-            this.InvokeAsync("consultaUsuario", new object[0], this.consultaUsuarioOperationCompleted, userState);
+            this.InvokeAsync("getJugadores", new object[0], this.getJugadoresOperationCompleted, userState);
         }
         
-        private void OnconsultaUsuarioOperationCompleted(object arg) {
-            if ((this.consultaUsuarioCompleted != null)) {
+        private void OngetJugadoresOperationCompleted(object arg) {
+            if ((this.getJugadoresCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.consultaUsuarioCompleted(this, new consultaUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getJugadoresCompleted(this, new getJugadoresCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/consultaPartidoEnCurso", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Partido[] consultaPartidoEnCurso(bool enCurso) {
-            object[] results = this.Invoke("consultaPartidoEnCurso", new object[] {
-                        enCurso});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getJugadorPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Jugador[] getJugadorPartido(int idPartido) {
+            object[] results = this.Invoke("getJugadorPartido", new object[] {
+                        idPartido});
+            return ((Jugador[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getJugadorPartidoAsync(int idPartido) {
+            this.getJugadorPartidoAsync(idPartido, null);
+        }
+        
+        /// <remarks/>
+        public void getJugadorPartidoAsync(int idPartido, object userState) {
+            if ((this.getJugadorPartidoOperationCompleted == null)) {
+                this.getJugadorPartidoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetJugadorPartidoOperationCompleted);
+            }
+            this.InvokeAsync("getJugadorPartido", new object[] {
+                        idPartido}, this.getJugadorPartidoOperationCompleted, userState);
+        }
+        
+        private void OngetJugadorPartidoOperationCompleted(object arg) {
+            if ((this.getJugadorPartidoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getJugadorPartidoCompleted(this, new getJugadorPartidoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Partido getPartido(int idPartido) {
+            object[] results = this.Invoke("getPartido", new object[] {
+                        idPartido});
+            return ((Partido)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPartidoAsync(int idPartido) {
+            this.getPartidoAsync(idPartido, null);
+        }
+        
+        /// <remarks/>
+        public void getPartidoAsync(int idPartido, object userState) {
+            if ((this.getPartidoOperationCompleted == null)) {
+                this.getPartidoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPartidoOperationCompleted);
+            }
+            this.InvokeAsync("getPartido", new object[] {
+                        idPartido}, this.getPartidoOperationCompleted, userState);
+        }
+        
+        private void OngetPartidoOperationCompleted(object arg) {
+            if ((this.getPartidoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPartidoCompleted(this, new getPartidoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/getPartidosPendientes", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Partido[] getPartidosPendientes() {
+            object[] results = this.Invoke("getPartidosPendientes", new object[0]);
             return ((Partido[])(results[0]));
         }
         
         /// <remarks/>
-        public void consultaPartidoEnCursoAsync(bool enCurso) {
-            this.consultaPartidoEnCursoAsync(enCurso, null);
+        public void getPartidosPendientesAsync() {
+            this.getPartidosPendientesAsync(null);
         }
         
         /// <remarks/>
-        public void consultaPartidoEnCursoAsync(bool enCurso, object userState) {
-            if ((this.consultaPartidoEnCursoOperationCompleted == null)) {
-                this.consultaPartidoEnCursoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaPartidoEnCursoOperationCompleted);
+        public void getPartidosPendientesAsync(object userState) {
+            if ((this.getPartidosPendientesOperationCompleted == null)) {
+                this.getPartidosPendientesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPartidosPendientesOperationCompleted);
             }
-            this.InvokeAsync("consultaPartidoEnCurso", new object[] {
-                        enCurso}, this.consultaPartidoEnCursoOperationCompleted, userState);
+            this.InvokeAsync("getPartidosPendientes", new object[0], this.getPartidosPendientesOperationCompleted, userState);
         }
         
-        private void OnconsultaPartidoEnCursoOperationCompleted(object arg) {
-            if ((this.consultaPartidoEnCursoCompleted != null)) {
+        private void OngetPartidosPendientesOperationCompleted(object arg) {
+            if ((this.getPartidosPendientesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.consultaPartidoEnCursoCompleted(this, new consultaPartidoEnCursoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getPartidosPendientesCompleted(this, new getPartidosPendientesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/consultaPartidoRangos", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Partido[] consultaPartidoRangos(System.DateTime fechaIni, System.DateTime fechaFin) {
-            object[] results = this.Invoke("consultaPartidoRangos", new object[] {
-                        fechaIni,
-                        fechaFin});
-            return ((Partido[])(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/borrarParticipante", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool borrarParticipante(int idJugador, int idPartido) {
+            object[] results = this.Invoke("borrarParticipante", new object[] {
+                        idJugador,
+                        idPartido});
+            return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void consultaPartidoRangosAsync(System.DateTime fechaIni, System.DateTime fechaFin) {
-            this.consultaPartidoRangosAsync(fechaIni, fechaFin, null);
+        public void borrarParticipanteAsync(int idJugador, int idPartido) {
+            this.borrarParticipanteAsync(idJugador, idPartido, null);
         }
         
         /// <remarks/>
-        public void consultaPartidoRangosAsync(System.DateTime fechaIni, System.DateTime fechaFin, object userState) {
-            if ((this.consultaPartidoRangosOperationCompleted == null)) {
-                this.consultaPartidoRangosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaPartidoRangosOperationCompleted);
+        public void borrarParticipanteAsync(int idJugador, int idPartido, object userState) {
+            if ((this.borrarParticipanteOperationCompleted == null)) {
+                this.borrarParticipanteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnborrarParticipanteOperationCompleted);
             }
-            this.InvokeAsync("consultaPartidoRangos", new object[] {
-                        fechaIni,
-                        fechaFin}, this.consultaPartidoRangosOperationCompleted, userState);
+            this.InvokeAsync("borrarParticipante", new object[] {
+                        idJugador,
+                        idPartido}, this.borrarParticipanteOperationCompleted, userState);
         }
         
-        private void OnconsultaPartidoRangosOperationCompleted(object arg) {
-            if ((this.consultaPartidoRangosCompleted != null)) {
+        private void OnborrarParticipanteOperationCompleted(object arg) {
+            if ((this.borrarParticipanteCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.consultaPartidoRangosCompleted(this, new consultaPartidoRangosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.borrarParticipanteCompleted(this, new borrarParticipanteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/consultaPartidoJugadores", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Partido[] consultaPartidoJugadores(Jugador[] listaJugadores) {
-            object[] results = this.Invoke("consultaPartidoJugadores", new object[] {
-                        listaJugadores});
-            return ((Partido[])(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/altaCredencial", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool altaCredencial() {
+            object[] results = this.Invoke("altaCredencial", new object[0]);
+            return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void consultaPartidoJugadoresAsync(Jugador[] listaJugadores) {
-            this.consultaPartidoJugadoresAsync(listaJugadores, null);
+        public void altaCredencialAsync() {
+            this.altaCredencialAsync(null);
         }
         
         /// <remarks/>
-        public void consultaPartidoJugadoresAsync(Jugador[] listaJugadores, object userState) {
-            if ((this.consultaPartidoJugadoresOperationCompleted == null)) {
-                this.consultaPartidoJugadoresOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaPartidoJugadoresOperationCompleted);
+        public void altaCredencialAsync(object userState) {
+            if ((this.altaCredencialOperationCompleted == null)) {
+                this.altaCredencialOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaltaCredencialOperationCompleted);
             }
-            this.InvokeAsync("consultaPartidoJugadores", new object[] {
-                        listaJugadores}, this.consultaPartidoJugadoresOperationCompleted, userState);
+            this.InvokeAsync("altaCredencial", new object[0], this.altaCredencialOperationCompleted, userState);
         }
         
-        private void OnconsultaPartidoJugadoresOperationCompleted(object arg) {
-            if ((this.consultaPartidoJugadoresCompleted != null)) {
+        private void OnaltaCredencialOperationCompleted(object arg) {
+            if ((this.altaCredencialCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.consultaPartidoJugadoresCompleted(this, new consultaPartidoJugadoresCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/consultaRanking", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Ranking[] consultaRanking() {
-            object[] results = this.Invoke("consultaRanking", new object[0]);
-            return ((Ranking[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void consultaRankingAsync() {
-            this.consultaRankingAsync(null);
-        }
-        
-        /// <remarks/>
-        public void consultaRankingAsync(object userState) {
-            if ((this.consultaRankingOperationCompleted == null)) {
-                this.consultaRankingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaRankingOperationCompleted);
-            }
-            this.InvokeAsync("consultaRanking", new object[0], this.consultaRankingOperationCompleted, userState);
-        }
-        
-        private void OnconsultaRankingOperationCompleted(object arg) {
-            if ((this.consultaRankingCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.consultaRankingCompleted(this, new consultaRankingCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/consultaDenuncia", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Denuncia[] consultaDenuncia() {
-            object[] results = this.Invoke("consultaDenuncia", new object[0]);
-            return ((Denuncia[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void consultaDenunciaAsync() {
-            this.consultaDenunciaAsync(null);
-        }
-        
-        /// <remarks/>
-        public void consultaDenunciaAsync(object userState) {
-            if ((this.consultaDenunciaOperationCompleted == null)) {
-                this.consultaDenunciaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaDenunciaOperationCompleted);
-            }
-            this.InvokeAsync("consultaDenuncia", new object[0], this.consultaDenunciaOperationCompleted, userState);
-        }
-        
-        private void OnconsultaDenunciaOperationCompleted(object arg) {
-            if ((this.consultaDenunciaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.consultaDenunciaCompleted(this, new consultaDenunciaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.altaCredencialCompleted(this, new altaCredencialCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -324,154 +327,7 @@ namespace TrucoNetBackend.truconetDomain {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://truconet/")]
-    public partial class Usuario {
-        
-        private int idField;
-        
-        private string eMailField;
-        
-        private string telefonoField;
-        
-        private string apellidoField;
-        
-        private string nombreField;
-        
-        /// <remarks/>
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EMail {
-            get {
-                return this.eMailField;
-            }
-            set {
-                this.eMailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Telefono {
-            get {
-                return this.telefonoField;
-            }
-            set {
-                this.telefonoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Apellido {
-            get {
-                return this.apellidoField;
-            }
-            set {
-                this.apellidoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://truconet/")]
-    public partial class Denuncia {
-        
-        private string desDenunciaField;
-        
-        private int codDenunciaField;
-        
-        /// <remarks/>
-        public string DesDenuncia {
-            get {
-                return this.desDenunciaField;
-            }
-            set {
-                this.desDenunciaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CodDenuncia {
-            get {
-                return this.codDenunciaField;
-            }
-            set {
-                this.codDenunciaField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://truconet/")]
-    public partial class Ranking {
-        
-        private string puntajeField;
-        
-        private Jugador jugField;
-        
-        private int posicionField;
-        
-        /// <remarks/>
-        public string Puntaje {
-            get {
-                return this.puntajeField;
-            }
-            set {
-                this.puntajeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Jugador Jug {
-            get {
-                return this.jugField;
-            }
-            set {
-                this.jugField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int Posicion {
-            get {
-                return this.posicionField;
-            }
-            set {
-                this.posicionField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://truconet/")]
-    public partial class Jugador {
+    public partial class Jugador : Usuario {
         
         private cartasMano manoField;
         
@@ -512,6 +368,8 @@ namespace TrucoNetBackend.truconetDomain {
         
         private Carta[] cartasField;
         
+        private int idPartidoField;
+        
         /// <remarks/>
         public int Puntos {
             get {
@@ -539,6 +397,16 @@ namespace TrucoNetBackend.truconetDomain {
             }
             set {
                 this.cartasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdPartido {
+            get {
+                return this.idPartidoField;
+            }
+            set {
+                this.idPartidoField = value;
             }
         }
     }
@@ -648,8 +516,6 @@ namespace TrucoNetBackend.truconetDomain {
         
         private string descripcionField;
         
-        private Carta[] masoJuegoField;
-        
         /// <remarks/>
         public int Id {
             get {
@@ -729,14 +595,74 @@ namespace TrucoNetBackend.truconetDomain {
                 this.descripcionField = value;
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Jugador))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3074")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://truconet/")]
+    public partial class Usuario {
+        
+        private int idField;
+        
+        private string eMailField;
+        
+        private string telefonoField;
+        
+        private string apellidoField;
+        
+        private string nombreField;
         
         /// <remarks/>
-        public Carta[] MasoJuego {
+        public int Id {
             get {
-                return this.masoJuegoField;
+                return this.idField;
             }
             set {
-                this.masoJuegoField = value;
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EMail {
+            get {
+                return this.eMailField;
+            }
+            set {
+                this.eMailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Telefono {
+            get {
+                return this.telefonoField;
+            }
+            set {
+                this.telefonoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Apellido {
+            get {
+                return this.apellidoField;
+            }
+            set {
+                this.apellidoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
             }
         }
     }
@@ -759,53 +685,105 @@ namespace TrucoNetBackend.truconetDomain {
         }
         
         /// <remarks/>
-        public string Result {
+        public int Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((int)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void consultaUsuarioCompletedEventHandler(object sender, consultaUsuarioCompletedEventArgs e);
+    public delegate void getJugadoresCompletedEventHandler(object sender, getJugadoresCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class consultaUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getJugadoresCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal consultaUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getJugadoresCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public Usuario[] Result {
+        public Jugador[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Usuario[])(this.results[0]));
+                return ((Jugador[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void consultaPartidoEnCursoCompletedEventHandler(object sender, consultaPartidoEnCursoCompletedEventArgs e);
+    public delegate void getJugadorPartidoCompletedEventHandler(object sender, getJugadorPartidoCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class consultaPartidoEnCursoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getJugadorPartidoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal consultaPartidoEnCursoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getJugadorPartidoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Jugador[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Jugador[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void getPartidoCompletedEventHandler(object sender, getPartidoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPartidoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPartidoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Partido Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Partido)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void getPartidosPendientesCompletedEventHandler(object sender, getPartidosPendientesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPartidosPendientesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPartidosPendientesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -821,104 +799,52 @@ namespace TrucoNetBackend.truconetDomain {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void consultaPartidoRangosCompletedEventHandler(object sender, consultaPartidoRangosCompletedEventArgs e);
+    public delegate void borrarParticipanteCompletedEventHandler(object sender, borrarParticipanteCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class consultaPartidoRangosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class borrarParticipanteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal consultaPartidoRangosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal borrarParticipanteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public Partido[] Result {
+        public bool Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Partido[])(this.results[0]));
+                return ((bool)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void consultaPartidoJugadoresCompletedEventHandler(object sender, consultaPartidoJugadoresCompletedEventArgs e);
+    public delegate void altaCredencialCompletedEventHandler(object sender, altaCredencialCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class consultaPartidoJugadoresCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class altaCredencialCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal consultaPartidoJugadoresCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal altaCredencialCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public Partido[] Result {
+        public bool Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Partido[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void consultaRankingCompletedEventHandler(object sender, consultaRankingCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class consultaRankingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal consultaRankingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Ranking[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Ranking[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void consultaDenunciaCompletedEventHandler(object sender, consultaDenunciaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class consultaDenunciaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal consultaDenunciaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Denuncia[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Denuncia[])(this.results[0]));
+                return ((bool)(this.results[0]));
             }
         }
     }

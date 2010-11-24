@@ -14,8 +14,8 @@ namespace TrucoNetBackend
 
             //TODO Llamar a web-service para realizar ALTA USUARIO
                 truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
-               
-                return true;
+                
+                return ws.altaCredencial();
         }
 
         public static Boolean editarUsuario(String nom, String apellido,

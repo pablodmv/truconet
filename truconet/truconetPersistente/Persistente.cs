@@ -10,7 +10,7 @@ namespace truconetPersistente
 {
     public class Persistente
     {
-        protected String conn = "integrated security=SSPI;data source=GUSTAVOLEITES1;initial catalog=truconetDB";
+        protected String conn = "integrated security=SSPI;data source=GUSTAVOLEITES1\\SQLEXPRESS;initial catalog=truconetDB";
 
         public Persistente()
 		{
