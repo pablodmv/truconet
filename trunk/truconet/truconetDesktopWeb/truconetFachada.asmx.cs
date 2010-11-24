@@ -41,10 +41,11 @@ namespace truconetDesktopWeb
 
 
         [WebMethod]
-        public int crearPartido() 
+        public int crearPartido(int[] idJugadores) 
         {
             truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
-            return ws.crearPartido();
+            return ws.crearPartido(idJugadores);
+            
         }
     
         [WebMethod]

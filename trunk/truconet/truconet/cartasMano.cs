@@ -54,6 +54,8 @@ namespace truconet
 
         public void chequearJugada()
         {
+            this.Jugada = 0;
+            this.Puntos = 0;
             List<Carta> piezas = new List<Carta>();
             List<Carta> resto = new List<Carta>();
             int cantPiezas = 0;
@@ -100,8 +102,6 @@ namespace truconet
                     {
                         esEnvido(null,resto);
                     }
-
-                    
                     break;
             }
         
@@ -124,14 +124,14 @@ namespace truconet
                     if (resto[0].Numero>resto[1].Numero)
                     {
                         puntaje += resto[0].Numero;
-                        this.Puntos = puntaje;
-                        this.Jugada = 2;
+                        //this.Puntos = puntaje;
+                        //this.Jugada = 2;
                     }
                     else
                     {
                         puntaje += resto[1].Numero;
-                        this.Puntos = puntaje;
-                        this.Jugada = 2;
+                        //this.Puntos = puntaje;
+                        //this.Jugada = 2;
                     }
                    
                 }
@@ -140,17 +140,23 @@ namespace truconet
                     if (resto[0].Numero<10) //Si hay una negra y no es la primera, sumo el valor de esa carta.
                     {
                         puntaje += resto[0].Numero;
-                        this.Puntos = puntaje;
-                        this.Jugada = 2;
+                        //this.Puntos = puntaje;
+                        //this.Jugada = 2;
                     }
                     else
                     {
-                        puntaje += resto[1].Numero;
-                        this.Puntos = puntaje;
-                        this.Jugada = 2;
+                        if (resto[1].Numero<10)
+                        {
+                            puntaje += resto[1].Numero;
+                            //this.Puntos = puntaje;
+                            //this.Jugada = 2;    
+                        }
+                        
                     }
 
                 }
+                this.Puntos = puntaje;
+                this.Jugada = 2; 
             }
             else //Si la pieza es null
             {
@@ -172,6 +178,10 @@ namespace truconet
                 {
                     puntaje += 20;
                 }
+                if (negras.Count == 2 && negras[0].Palo != negras[1].Palo)  //Si son dos negras de distinto palo
+                {
+                    puntaje += blancas[0].Numero;
+                }
                 if (negras.Count == 1 && negras[0].Palo == blancas[0].Palo)  //si hay una negra y una blanca del mismo palo
                 {
                     puntaje += 20 + blancas[0].Numero;
@@ -183,6 +193,18 @@ namespace truconet
                 if (negras.Count == 1 && blancas[0].Palo == blancas[1].Palo) //Si hay dos blancas del mismo palo
                 {
                     puntaje += blancas[0].Numero + blancas[1].Numero + 20;
+                }
+                if (negras.Count == 1 && blancas[0].Palo != blancas[1].Palo && puntaje==0) //Si hay dos blancas de distinto mismo palo
+                {
+                    if (blancas[0].Numero>blancas[1].Numero)
+                    {
+                        puntaje += blancas[0].Numero;
+                    }
+                    else
+                    {
+                        puntaje += blancas[1].Numero;
+                    }
+                   
                 }
                 if (negras.Count == 0 && blancas[0].Palo == blancas[1].Palo) //Si hay dos blancas del mismo palo
                 {
@@ -197,7 +219,7 @@ namespace truconet
                     puntaje += blancas[1].Numero + blancas[2].Numero + 20;
                 }
 
-                if (blancas.Count==3) //si son 3 blancas de distinto palo, busco la mayor
+                if (blancas.Count==3 && puntaje==0 && blancas[0].Palo!= blancas[1].Palo && blancas[1].Palo!=blancas[2].Palo && blancas[0].Palo!=blancas[2].Palo) //si son 3 blancas de distinto palo, busco la mayor
                 {
                     Carta mayor=resto[0];
                     foreach (Carta card in resto)
@@ -214,7 +236,8 @@ namespace truconet
                 {
                     puntaje = 0;
                 }
-
+                this.Puntos = puntaje;
+                this.Jugada = 2;
             }
         }
 
@@ -260,31 +283,31 @@ namespace truconet
         public void florDosPiezas(List<Carta> piezas, Carta cartaResto)
         {
             int puntaje = 0;
-            if (piezas[0].Puntaje > piezas[1].Puntaje)
-            {
+            //if (piezas[0].Puntaje > piezas[1].Puntaje)
+            //{
                 if (cartaResto.Numero < 10)
                 {
-                    puntaje += (piezas[0].Puntaje + (piezas[1].Puntaje - 20) + cartaResto.Numero);
+                    puntaje += ((piezas[0].Puntaje + piezas[1].Puntaje) - 20) + cartaResto.Numero;
                 }
                 else
                 {
-                    puntaje += (piezas[0].Puntaje + (piezas[1].Puntaje - 20));
+                    puntaje += (piezas[0].Puntaje + piezas[1].Puntaje) - 20;
                 }
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
 
-                if (cartaResto.Numero < 10)
-                {
-                    puntaje += (piezas[1].Puntaje + (piezas[0].Puntaje - 20) + cartaResto.Numero);
-                }
-                else
-                {
-                    puntaje += (piezas[1].Puntaje + (piezas[0].Puntaje - 20));
-                }
+            //    if (cartaResto.Numero < 10)
+            //    {
+            //        puntaje += (piezas[1].Puntaje + (piezas[0].Puntaje - 20) + cartaResto.Numero);
+            //    }
+            //    else
+            //    {
+            //        puntaje += (piezas[1].Puntaje + (piezas[0].Puntaje - 20));
+            //    }
 
-            }
+            //}
             this.Jugada = 1;
             this.Puntos = puntaje;
         }

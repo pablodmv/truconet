@@ -23,12 +23,10 @@ namespace truconetDomainWs
     {
 
         [WebMethod]
-        public int crearPartido()
+        public int crearPartido(int[] idJugadores)
         {
             truconet.Truco ws= truconet.Truco.getInstance();
-            int i=0;
-            int[] pepe = { 0, 1, };
-            return ws.iniciarPartido(pepe, "Partido" + i++);
+            return ws.iniciarPartido(idJugadores, "Partido");
 
              
         }
@@ -101,7 +99,7 @@ namespace truconetDomainWs
         [WebMethod]
         public bool altaCredencial()
         {
-            truconetPersistente.CredencialPersistente ws = truconetPersistente.CredencialPersistente();
+            truconetPersistente.CredencialPersistente ws = new truconetPersistente.CredencialPersistente();
             return ws.alta();
 
         }

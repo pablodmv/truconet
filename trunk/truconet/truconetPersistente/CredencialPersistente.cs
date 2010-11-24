@@ -29,13 +29,15 @@ namespace truconetPersistente
 
                 DataSet dsUsuarios = new DataSet();
 
-                dbDataAdapter.Update(dsUsuarios.Tables("CRFDENCIALES"));
+                dbDataAdapter.Update(dsUsuarios,"CREDENCIALES");
                 //dbDataAdapter.Fill(dsUsuarios,"USUARIOS");
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+            return false;
         }
     }
 }

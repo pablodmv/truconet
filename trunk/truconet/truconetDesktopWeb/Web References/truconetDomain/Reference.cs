@@ -100,22 +100,24 @@ namespace truconetDesktopWeb.truconetDomain {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://truconet/crearPartido", RequestNamespace="http://truconet/", ResponseNamespace="http://truconet/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int crearPartido() {
-            object[] results = this.Invoke("crearPartido", new object[0]);
+        public int crearPartido(int[] idJugadores) {
+            object[] results = this.Invoke("crearPartido", new object[] {
+                        idJugadores});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void crearPartidoAsync() {
-            this.crearPartidoAsync(null);
+        public void crearPartidoAsync(int[] idJugadores) {
+            this.crearPartidoAsync(idJugadores, null);
         }
         
         /// <remarks/>
-        public void crearPartidoAsync(object userState) {
+        public void crearPartidoAsync(int[] idJugadores, object userState) {
             if ((this.crearPartidoOperationCompleted == null)) {
                 this.crearPartidoOperationCompleted = new System.Threading.SendOrPostCallback(this.OncrearPartidoOperationCompleted);
             }
-            this.InvokeAsync("crearPartido", new object[0], this.crearPartidoOperationCompleted, userState);
+            this.InvokeAsync("crearPartido", new object[] {
+                        idJugadores}, this.crearPartidoOperationCompleted, userState);
         }
         
         private void OncrearPartidoOperationCompleted(object arg) {
