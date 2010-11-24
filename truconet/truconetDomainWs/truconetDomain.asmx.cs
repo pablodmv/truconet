@@ -94,6 +94,17 @@ namespace truconetDomainWs
         //}
 
 
+        //Web Methods sobre persistencia
+
+
+        // Credencial
+        [WebMethod]
+        public bool altaCredencial()
+        {
+            truconetPersistente.CredencialPersistente ws = truconetPersistente.CredencialPersistente();
+            return ws.alta();
+
+        }
 
 
 

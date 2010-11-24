@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetDesktopWeb", "truco
 		{F69A72AE-A93A-488F-92A0-08C9532D00F0} = {F69A72AE-A93A-488F-92A0-08C9532D00F0}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "truconetPersistente", "truconetPersistente\truconetPersistente.csproj", "{F21C3B4A-8427-4706-8CF6-092BC6C91174}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8851E235-F9BE-499A-9BCA-ED3A645E1457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F21C3B4A-8427-4706-8CF6-092BC6C91174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21C3B4A-8427-4706-8CF6-092BC6C91174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21C3B4A-8427-4706-8CF6-092BC6C91174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21C3B4A-8427-4706-8CF6-092BC6C91174}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

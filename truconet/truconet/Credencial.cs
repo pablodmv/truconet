@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using truconetPersistente;
 
 namespace truconet
 {
@@ -12,6 +13,8 @@ namespace truconet
         private String pass;
         private String nick;
         private Boolean admin;
+
+        private CredencialPersistente credPersist = new CredencialPersistente(); 
 
         //Constructores
         public Credencial()
@@ -44,6 +47,10 @@ namespace truconet
         {
             get { return nick; }
             set { nick = value; }
+        }
+
+        public Boolean alta(){
+            this.credPersist.alta();
         }
 
     }

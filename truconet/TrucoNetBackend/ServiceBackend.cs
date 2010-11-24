@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using truconet;
+using TrucoNetBackend.truconetDomain;
 
 namespace TrucoNetBackend
 {
@@ -13,6 +13,8 @@ namespace TrucoNetBackend
             String telefono, String mail, String login, String pwd, String nick, Boolean adm){
 
             //TODO Llamar a web-service para realizar ALTA USUARIO
+                truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
+               
                 return true;
         }
 
@@ -33,9 +35,11 @@ namespace TrucoNetBackend
 
         public static List<Usuario> consultaUsuario()
         {
-            List<Usuario> listaUsuarios = new List<Usuario>();
+            truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
+            
+            
             //TODO Llamar a web-service para realizar CONSULTA USUARIO
-            return listaUsuarios;
+            return ws.consultaUsuario();
         }
 
 
@@ -61,19 +65,17 @@ namespace TrucoNetBackend
         public static List<Partido> consultaPartido(Boolean enCurso)
         {
             //TODO Llamar a web-service para realizar CONSULTA PARTIDO (En CURSO/TERMINDADO)
-
-            List<Partido> listaPartidos = new List<Partido>();
-
-            return listaPartidos;
+            truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
+           
+            return ws.consultaPartidoEnCurso(enCurso);
         }
 
         public static List<Partido> consultaPartido(DateTime fechaIni, DateTime fechaFin)
         {
             //TODO Llamar a web-service para realizar CONSULTA PARTIDO (RANGO DE FECHAS)
+            truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
 
-            List<Partido> listaPartidos = new List<Partido>();
-
-            return listaPartidos;
+            return ws.consultaPartidoRangos(fechaIni, fechaFin);
 
         }
 
@@ -81,10 +83,9 @@ namespace TrucoNetBackend
         public static List<Partido> consultaPartido(List<Jugador> listaJugadores)
         {
             //TODO Llamar a web-service para realizar CONSULTA PARTIDO (JUGADOR/ES)
+            truconetDomain.truconetDomain ws = new truconetDomain.truconetDomain();
 
-            List<Partido> listaPartidos = new List<Partido>();
-
-            return listaPartidos;
+            return ws.consultaPartidoJugadores(listaJugadores);
 
         }
 

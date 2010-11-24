@@ -64,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\truconetPersistente\truconetPersistente.csproj">
+      <Project>{F21C3B4A-8427-4706-8CF6-092BC6C91174}</Project>
+      <Name>truconetPersistente</Name>
+    </ProjectReference>
     <ProjectReference Include="..\truconet\truconet.csproj">
       <Project>{80DD7855-32A1-4F85-9B38-82A3E0255AA9}</Project>
       <Name>truconet</Name>

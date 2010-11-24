@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace truconetDesktop.Properties {
+namespace truconet.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,11 +25,12 @@ namespace truconetDesktop.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51052/truconetFachada.asmx")]
-        public string truconetDesktop_localhost_truconetFachada {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GUSTAVOLEITES1\\SQLEXPRESS;Initial Catalog=truconetDB;Integrated Secur" +
+            "ity=True")]
+        public string truconetDBConnectionString {
             get {
-                return ((string)(this["truconetDesktop_localhost_truconetFachada"]));
+                return ((string)(this["truconetDBConnectionString"]));
             }
         }
     }

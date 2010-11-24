@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using truconet;
 
 namespace TrucoNetBackend
 {
@@ -299,7 +298,7 @@ namespace TrucoNetBackend
 
             Console.WriteLine("Id |    Nombre/Apellido   |   EMAIL   |    Login    |    Nick   |     Adm   |");
 
-            List<Usuario> listaUsuarios = ServiceBackend.consultaUsuario();
+            //List<Usuario> listaUsuarios = ServiceBackend.consultaUsuario();
 
 
             //TODO Recorrer lista de usuarios en consulta y mostrarlos
@@ -477,7 +476,7 @@ namespace TrucoNetBackend
         {
             Console.WriteLine("Pos |    Jugador   |   Puntaje   |");
 
-            List<Ranking> listaRankings = ServiceBackend.consultaRanking();
+            //List<Ranking> listaRankings = ServiceBackend.consultaRanking();
 
 
             //TODO Recorrer lista de RANKING en consulta y mostrarlos
@@ -553,7 +552,7 @@ namespace TrucoNetBackend
 
             Console.WriteLine("Cod |    Descripción   |");
 
-            List<Denuncia> listaDenuncias = ServiceBackend.consultaDenuncia();
+            //List<Denuncia> listaDenuncias = ServiceBackend.consultaDenuncia();
 
 
             //TODO Recorrer lista de denuncias en consulta y mostrarlos
