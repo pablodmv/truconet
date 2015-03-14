@@ -1,0 +1,1 @@
+Trabajo academico donde se implementa el juego de Truco
